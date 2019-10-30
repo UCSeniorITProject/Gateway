@@ -1,0 +1,33 @@
+{
+  "name": "Gateway",
+  "version": "1.0.0",
+  "description": "API gateway for safe meds",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SafeMedsSeniorDesign/Gateway.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SafeMedsSeniorDesign/Gateway/issues"
+  },
+  "homepage": "https://github.com/SafeMedsSeniorDesign/Gateway#readme",
+  "dependencies": {
+    "assert": "^2.0.0",
+    "boom": "^7.3.0",
+    "fastify": "^2.10.0",
+    "fastify-swagger": "^2.4.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
+  },
+  "devDependencies": {
+    "faker": "^4.1.0",
+    "mocha": "^6.2.2",
+    "shot": "^4.0.7"
+  }
+}
