@@ -7,6 +7,11 @@ const swagger = require('../swagger-config');
 
 (async () => {
   try {
+
+    fastify.register(require('fastify-cors'), { 
+      origin: config.allowedOrigins,
+      methods: ['GET', 'PUT', 'POST'],
+    });
     fastify.register(require('fastify-swagger'), swagger.options);
     fastify.register(require('./controllers/auth'), {prefix: '/api/security-management'});
     await fastify.listen(config.port, config.serverHost);
