@@ -19,7 +19,6 @@ exports.login = async (req, reply) => {
 exports.refreshAccessToken = async(req, reply) => {
   try {
     const refreshedTokens = await SecurityManagementService.refreshAccessToken(req.body.refreshToken);
-    console.log(refreshedTokens)
     if('accessToken' in refreshedTokens === false) {
       return reply
                 .code(401)
@@ -27,6 +26,15 @@ exports.refreshAccessToken = async(req, reply) => {
     }
 
     return  {...refreshedTokens};
+  } catch (err) {
+    throw boomify(err);
+  }
+};
+
+exports.createUser = async(req, reply) => {
+  try {
+    const user = await SecurityManagementService.createUser(req.body.user);
+    return {user};
   } catch (err) {
     throw boomify(err);
   }

@@ -45,3 +45,21 @@ exports.refreshAccessToken = async (refreshToken) => {
     throw boomify(err);
   }
 };
+
+exports.createUser = async (user) => {
+  try {
+    const requestOptions = {
+      method: 'POST',
+      uri: `${securityManagement}/api/user`,
+      body: {
+        user,
+      },
+      json: true,
+    };
+
+    const userCreateRequest = await request(requestOptions);
+    return {...userCreateRequest};
+  } catch (err) {
+    throw boomify(err);
+  }
+};
