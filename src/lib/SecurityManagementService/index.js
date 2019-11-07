@@ -24,3 +24,24 @@ exports.login = async (username, password) => {
     throw boomify(err);
   }
 };
+
+exports.refreshAccessToken = async (refreshToken) => {
+  try {
+    const requestOptions = {
+      method: 'POST',
+      uri: `${securityManagement}/api/user/token/refresh`,
+      body: {
+        refreshToken,
+      },
+      json: true,
+    };
+
+    const tokenRefreshRequest = await request(requestOptions);
+    return {...tokenRefreshRequest};
+  } catch (err) {
+    if(err.name === 'StatusCodeError'){
+      return {};
+    }
+    throw boomify(err);
+  }
+};
