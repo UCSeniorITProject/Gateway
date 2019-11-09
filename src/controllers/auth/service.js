@@ -39,3 +39,12 @@ exports.createUser = async(req, reply) => {
     throw boomify(err);
   }
 };
+
+exports.getUserWithFilter = async(req, reply) => {
+  try {
+    const users = await SecurityManagementService.getUserWithFilter(req.req);
+    return {users};
+  } catch (err) {
+    throw boomify(err);
+  }
+};
