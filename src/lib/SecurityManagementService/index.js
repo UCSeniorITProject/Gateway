@@ -1,6 +1,7 @@
 const request = require('request-promise');
 const {securityManagement} = require('../../../config').services;
 const qs = require('query-string');
+const {boomify} = require('boom');
 
 exports.login = async (username, password) => {
   try {
@@ -47,11 +48,11 @@ exports.refreshAccessToken = async (refreshToken) => {
   }
 };
 
-exports.verifyToken = async (refreshToken) => {
+exports.verifyToken = async (token) => {
   try {
     const requestOptions = {
       method: 'POST',
-      uri: `${securityManagement}/api/token/verify`,
+      uri: `${securityManagement}/api/user/token/verify`,
       body: {
         token,
       },
@@ -83,16 +84,19 @@ exports.createUser = async (user) => {
   }
 };
 
-exports.getUserWithFilter = async (filter) => {
+exports.getUserWithFilter = async (filter, token) => {
   try {
     const requestOptions = {
       method: 'GET',
       uri: `${securityManagement}/api/user?${qs.stringify(filter)}`,
+      headers: {
+        authorization: token,
+      },
       json: true,
     };
 
     const usersRequest = await request(requestOptions);
-    return {users: usersRequest};
+    return usersRequest.users;
   } catch (err) {
     throw boomify(err);
   }

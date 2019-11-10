@@ -42,7 +42,8 @@ exports.createUser = async(req, reply) => {
 
 exports.getUserWithFilter = async(req, reply) => {
   try {
-    const users = await SecurityManagementService.getUserWithFilter(req.req);
+    const users = await SecurityManagementService.getUserWithFilter(req.query, req.headers.authorization);
+    console.log(users)
     return {users};
   } catch (err) {
     throw boomify(err);

@@ -4,10 +4,33 @@ const fastify = require('fastify')({
   pluginTimeout: 60000,
 });
 const swagger = require('../swagger-config');
-
+const {verifyToken} = require('./lib/SecurityManagementService');
+const unAuthorizedEndpoints = [{
+  method: 'POST',
+  url: '/api/user'
+}];
 (async () => {
   try {
+    fastify.addHook('onRequest', async (req, reply) => {
+      //allow endpoints that do not require auth
+      if(unAuthorizedEndpoints.filter(x => x.url === req.raw.originalUrl && req.raw.method === x.method).length > 0){
+        return;
+      }
+      
+      const authToken = req.headers.authorization;
+      if(authToken === undefined){
+        return reply
+                  .code(401)
+                  .send({msg: 'Access token was not found'});
+      }
 
+      const tokenVerificationRequest = await verifyToken(authToken.substr(authToken.indexOf('Bearer') + 7, authToken.length));
+      if(!tokenVerificationRequest.valid){
+        return reply
+            .code(401)
+            .send({msg: 'Access token is invalid'});
+      }
+    });
     fastify.register(require('fastify-cors'), { 
       origin: config.allowedOrigins,
       methods: ['GET', 'PUT', 'POST'],
