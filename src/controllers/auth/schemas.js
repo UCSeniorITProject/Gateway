@@ -53,7 +53,8 @@ const privilegeAfterSave = {
   }
 };
 
-const userAfterSaveWithRolesAndPrivs= {  createdAt: {
+const userAfterSaveWithRolesAndPrivs= {  
+  createdAt: {
   type: 'string',
   description: 'The date the record was created',
 },
@@ -279,9 +280,7 @@ exports.getWithFilter = {
   tags: ['User'],
   summary: 'Retrieves all users matching the given filter',
   query: {
-    type: 'object',
-    description: 'The filter to retrieve users with',
-    properties: userAfterSave,
+    ...userAfterSave,
   },
   exposeRoute: true,
   response: {
