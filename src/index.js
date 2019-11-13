@@ -21,7 +21,7 @@ const unAuthorizedEndpoints = [{
   try {
     fastify.register(require('fastify-cors'), { 
       origin: true,
-      methods: ['GET', 'PUT', 'POST', 'PATCH'],
+      methods: ['GET', 'PUT', 'POST', 'PATCH', 'OPTIONS'],
     });
     fastify.addHook('onRequest', async (req, reply) => {
       //allow endpoints that do not require auth

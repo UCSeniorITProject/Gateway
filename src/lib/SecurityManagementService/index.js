@@ -101,3 +101,24 @@ exports.getUserWithFilter = async (filter, token) => {
     throw boomify(err);
   }
 };
+
+exports.updateUser = async (userID, propertiesToUpdate, token) => {
+  try {
+    const requestOptions = {
+      method: 'PATCH',
+      uri: `${securityManagement}/api/user/${userID}`,
+      body: {
+        ...propertiesToUpdate,
+      },
+      headers: {
+        authorization: token,
+      },
+      JSON: true,
+    };
+
+    const updateUserRequest = await request(requestOptions);
+    return updateUserRequest.user;
+  } catch (err){
+    throw boomify(err);
+  }
+};

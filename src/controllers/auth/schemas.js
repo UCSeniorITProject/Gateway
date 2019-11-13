@@ -279,7 +279,7 @@ exports.getWithFilter = {
   description: 'Gets all users matching the provided filter',
   tags: ['User'],
   summary: 'Retrieves all users matching the given filter',
-  query: {
+  querystring: {
     ...userAfterSave,
   },
   exposeRoute: true,
