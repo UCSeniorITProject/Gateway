@@ -12,6 +12,10 @@ const unAuthorizedEndpoints = [{
 {
   method: 'GET',
   url: '/api/security-management/user'
+},
+{
+  method: 'POST',
+  url: '/api/security-management/login',
 }];
 (async () => {
   try {

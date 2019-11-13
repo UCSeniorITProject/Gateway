@@ -78,7 +78,7 @@ exports.createUser = async (user) => {
     };
 
     const userCreateRequest = await request(requestOptions);
-    return {user: userCreateRequest};
+    return {...userCreateRequest.user};
   } catch (err) {
     throw boomify(err);
   }

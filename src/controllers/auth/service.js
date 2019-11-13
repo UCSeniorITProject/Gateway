@@ -34,6 +34,7 @@ exports.refreshAccessToken = async(req, reply) => {
 exports.createUser = async(req, reply) => {
   try {
     const user = await SecurityManagementService.createUser(req.body.user);
+    console.log(user)
     return {user};
   } catch (err) {
     throw boomify(err);
