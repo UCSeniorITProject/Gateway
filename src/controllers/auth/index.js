@@ -6,5 +6,6 @@ module.exports = (fastify, options, next) => {
   fastify.post('/token/refresh', {sceham: securitySchema.refreshToken}, securityService.refreshAccessToken);
   fastify.get('/user', {schema: securitySchema.getWithFilter}, securityService.getUserWithFilter);
   fastify.post('/user', {schema:  securitySchema.createUser}, securityService.createUser);
+  fastify.patch('/user/:id', {schema: securitySchema.updateUser}, securityService.updateUser);
   next();
 };

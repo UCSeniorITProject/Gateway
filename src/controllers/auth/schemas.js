@@ -301,3 +301,50 @@ exports.getWithFilter = {
     ...generic401Error,
   },
 };
+
+exports.updateUser = {
+  description: 'Updates the user with the given request body',
+  tags: ['User'],
+  summary: 'Updates the given user with the given request body',
+  params: {
+    type: 'object',
+    required: ['id'],
+    properties: {
+      id: {
+        type: 'number',
+        description: 'The ID of the user to update',
+      }
+    },
+  },
+  body: {
+    type: 'object',
+    properties: userBeforeSave,
+    description: 'The user values to update',
+  },
+  exposeRoute: true,
+  response: {
+    200: {
+      description: 'Successfully updated the user',
+      type: 'object',
+      properties: {
+        user: {
+          type: 'object',
+          properties: userAfterSave,
+          description: 'The user that was updated',
+        }
+      }
+    },
+    404: {
+      description: 'The user was not found',
+      type: 'object',
+      properties: {
+        msg: {
+          type: 'string',
+          description: 'The message returned by the API',
+          default: 'The user was not found',
+        }
+      },
+    },
+    ...generic401Error,
+  },
+};

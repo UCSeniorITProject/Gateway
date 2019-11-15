@@ -52,7 +52,7 @@ exports.getUserWithFilter = async(req, reply) => {
 
 exports.updateUser = async(req, reply) => {
   try {
-    const user = await SecurityManagementService.updateUser(req.params.userID, req.body, req.headers.authorization);
+    const user = await SecurityManagementService.updateUser(req.params.id, req.body, req.headers.authorization);
     return {user};
   } catch (err) {
     throw boomify(err);

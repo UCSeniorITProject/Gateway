@@ -104,6 +104,7 @@ exports.getUserWithFilter = async (filter, token) => {
 
 exports.updateUser = async (userID, propertiesToUpdate, token) => {
   try {
+    console.log(userID)
     const requestOptions = {
       method: 'PATCH',
       uri: `${securityManagement}/api/user/${userID}`,
@@ -113,7 +114,7 @@ exports.updateUser = async (userID, propertiesToUpdate, token) => {
       headers: {
         authorization: token,
       },
-      JSON: true,
+      json: true,
     };
 
     const updateUserRequest = await request(requestOptions);
