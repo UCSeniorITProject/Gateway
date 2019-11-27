@@ -46,6 +46,7 @@ const unAuthorizedEndpoints = [{
 
     fastify.register(require('fastify-swagger'), swagger.options);
     fastify.register(require('./controllers/auth'), {prefix: '/api/security-management'});
+    fastify.register(require('./controllers/patient'), {prefix: '/api/patient-service'});
     await fastify.listen(config.port, config.serverHost);
     fastify.swagger();
     fastify.log.info(`Server is listening on ${fastify.server.address().port}`);

@@ -1,7 +1,7 @@
 module.exports = {
   services: {
     securityManagement: process.env.securityManagementAddress || 'http://localhost:3001',
-    patientService: process.env.patientServiceAddress || 'http://localhost:8080'
+    patientService: process.env.patientServiceAddress || 'http://localhost:9091'
   },
   shouldFastifyLog: true,
   serverHost:  process.env.serverAddress || '0.0.0.0' ,

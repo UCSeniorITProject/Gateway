@@ -17,7 +17,7 @@ exports.getPatientsByDoctorId = async (doctorId) => {
   }
 };
 
-exports.createPatent = async (patient) => {
+exports.createPatient = async (patient) => {
   try {
      const requestOptions = {
       method: 'POST',

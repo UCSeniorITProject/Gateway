@@ -1,3 +1,5 @@
+const generic401Error = require('../../lib/constants/generic401Error');
+
 const patientBeforeSave = {
   address: {
     type: 'string',
@@ -57,3 +59,31 @@ const patientAfterSave = {
     description: 'The date the patient row was created',
   },
 }; 
+
+exports.createPatient = {
+  description: 'Creates a new patient',
+  tags: ['PatientManagement'],
+  summary: 'Creates a new patient with the given values',
+  body: {
+    type: 'object',
+    description: 'The patient that is being created',
+    properties: {
+      patient: patientBeforeSave,
+    }
+  },
+  exposeRoute: true,
+  response: {
+    200: {
+      description: 'Succesfully created the patient',
+      type: 'object',
+      properties: {
+        patient: {
+          type: 'object',
+          properties: patientAfterSave,
+          description: 'The newly created patient',
+        },
+      }
+    },
+    ...generic401Error,
+  }
+}
