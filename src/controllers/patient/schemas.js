@@ -58,6 +58,15 @@ const patientAfterSave = {
     type: 'string',
     description: 'The date the patient row was created',
   },
+  patientId: {
+    type: 'string',
+    description: 'The id of the patient that was created',
+  },
+  active: {
+    type: 'string',
+    description: 'Whether or not the row is active',
+    enum: ['Y', 'N'],
+  }
 }; 
 
 exports.createPatient = {
