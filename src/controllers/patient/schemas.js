@@ -161,3 +161,7 @@ exports.deletePatient = {
     ...generic401Error,
   }
 }
+
+exports.getPatientByDoctorId = {
+
+};

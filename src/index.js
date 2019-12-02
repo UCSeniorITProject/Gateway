@@ -5,18 +5,7 @@ const fastify = require('fastify')({
 });
 const swagger = require('../swagger-config');
 const {verifyToken} = require('./lib/SecurityManagementService');
-const unAuthorizedEndpoints = [{
-  method: 'POST',
-  url: '/api/security-management/user'
-},
-{
-  method: 'GET',
-  url: '/api/security-management/user'
-},
-{
-  method: 'POST',
-  url: '/api/security-management/login',
-}];
+const {unAuthorizedEndpoints} = require('../unAuthorizedEndpoints');
 (async () => {
   try {
     fastify.register(require('fastify-cors'), { 
