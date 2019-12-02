@@ -108,6 +108,16 @@ exports.updatePatient = {
       patient: patientBeforeSave
     }
   },
+  params: {
+    type: 'object',
+    required: ['id'],
+    properties: {
+      id: {
+        type: 'number',
+        description: 'The ID of the patient to update',
+      }
+    },
+  },
   exposeRoute: true,
   response: {
     200: {
@@ -124,3 +134,30 @@ exports.updatePatient = {
     ...generic401Error, 
   }
 };
+
+exports.deletePatient = {
+  description: 'Deletes the patient',
+  tags: ['SecurityManagement'],
+  summary: 'Deletes the patient',
+  params: {
+    type: 'object',
+    required: ['id'],
+    properties: {
+      id: {
+        type: 'number',
+        description: 'The ID of the patient to delete',
+      }
+    },
+  },
+  exposeRoute: true,
+  response: {
+    204: {
+      description: 'The patient was succesfully deleted',
+      type: 'object',
+      properties: {
+
+      }
+    },
+    ...generic401Error,
+  }
+}

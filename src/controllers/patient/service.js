@@ -12,8 +12,25 @@ exports.createPatient = async (req, reply) => {
 
 exports.updatePatient = async (req, reply) => {
   try {
-    const updatedPatient = await PatientManagementService.updatePatient(req.body.patient);
-    return {updatedPatient};
+    const updatedPatient = await PatientManagementService.updatePatient(req.params.id, req.body.patient);
+    return {patient: updatedPatient};
+  } catch (err) {
+    throw boomify(err);
+  }
+};
+
+exports.deletePatient = async (req, reply) => {
+  try {
+    await PatientManagementService.deletePatient(req.params.id);
+  } catch (err) {
+    throw boomify(err);
+  }
+};
+
+exports.getPatientsByDoctor = async(req, reply) => {
+  try {
+    const patients = await PatientManagementService.getPatientsByDoctorId(req.params.id);
+    return {patients};
   } catch (err) {
     throw boomify(err);
   }
