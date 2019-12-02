@@ -56,6 +56,5 @@ const unAuthorizedEndpoints = [{
   }
 })();
 
-
 module.exports = fastify;
  
