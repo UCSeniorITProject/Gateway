@@ -137,7 +137,7 @@ exports.updatePatient = {
 
 exports.deletePatient = {
   description: 'Deletes the patient',
-  tags: ['SecurityManagement'],
+  tags: ['PatientManagement'],
   summary: 'Deletes the patient',
   params: {
     type: 'object',

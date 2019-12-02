@@ -197,51 +197,6 @@ exports.login = {
   },
 };
 
-exports.refreshToken = {
-  description: 'Refresh the given access token',
-  tags: ['SecurityManagement'],
-  summary: 'Refreshes the given access token with the refresh token',
-  body: {
-    type:'object',
-    description: 'The refresh token to validate',
-    required: ['refreshToken'],
-    properties: {
-      refreshToken: {
-        type: 'string',
-        description: 'The refresh token',
-      },
-    },
-  },
-  exposeRoute: true,
-  response: {
-    200: {
-      description: 'Successfully granted auth token',
-      type: 'object',
-      properties: {
-        accessToken: {
-          type: 'string',
-          description: 'The new auth token that was granted',
-        },
-        refreshToken: {
-          type: 'string',
-          description: 'The refresh token was granted',
-        },
-      }
-    },
-    401: {
-      description: 'Bad authorization data',
-      type: 'object',
-      properties: {
-        msg: {
-          type: 'string',
-          description: 'The message returned by the API',
-          default: 'Invalid username or password',
-        }
-      },
-    },
-    ...generic401Error,
-  },
-};
 
 exports.createUser = {
   description: 'Creates a new user with the given values',
@@ -344,6 +299,41 @@ exports.updateUser = {
           default: 'The user was not found',
         }
       },
+    },
+    ...generic401Error,
+  },
+};
+
+exports.refreshToken = {
+  description: 'Refresh the given access token',
+  tags: ['SecurityManagement'],
+  summary: 'Refreshes the given access token with the refresh token',
+  body: {
+    type:'object',
+    description: 'The refresh token to validate',
+    required: ['refreshToken'],
+    properties: {
+      refreshToken: {
+        type: 'string',
+        description: 'The refresh token',
+      },
+    },
+  },
+  exposeRoute: true,
+  response: {
+    200: {
+      description: 'Successfully granted auth token',
+      type: 'object',
+      properties: {
+        accessToken: {
+          type: 'string',
+          description: 'The new auth token that was granted',
+        },
+        refreshToken: {
+          type: 'string',
+          description: 'The refresh token was granted',
+        },
+      }
     },
     ...generic401Error,
   },
