@@ -95,4 +95,32 @@ exports.createPatient = {
     },
     ...generic401Error,
   }
-}
+};
+
+exports.updatePatient = {
+  description: 'Patches a patient',
+  tags: ['PatientManagement'],
+  summary: 'Patches a patient with the given values',
+  body: {
+    type: 'object',
+    description: 'The patient values to patch',
+    properties: {
+      patient: patientBeforeSave
+    }
+  },
+  exposeRoute: true,
+  response: {
+    200: {
+      description: 'Succesfully patched the patient',
+      type: 'object',
+      properties: {
+        patient: {
+          type: 'object',
+          properties: patientAfterSave,
+          description: 'Thew newly updated patient',
+        },
+      }
+    },
+    ...generic401Error, 
+  }
+};
