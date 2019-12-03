@@ -2,11 +2,11 @@ const request = require('request-promise');
 const {patientService} = require('../../../config').services;
 const {boomify} = require('boom');
 
-exports.getPatientsByDoctorId = async (doctorId) => {
+exports.getPatientList = async (doctorId) => {
   try {
     const requestOptions = {
       method: 'GET',
-      uri: `${patientService}/api/doctor/${doctorId}/patients`,
+      uri: `${patientService}/api/patients`,
       json: true,
     };
 

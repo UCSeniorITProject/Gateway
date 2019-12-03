@@ -69,6 +69,28 @@ const patientAfterSave = {
   }
 }; 
 
+exports.getPatientList = {
+  description: 'Gets a list of patiients',
+  tags: ['PatientManagement'],
+  summary: 'Gets a list of patients to display',
+  exposeRoute: true,
+  response: {
+    200: {
+      description: 'Succesfully retrieved a list of patients',
+      type: 'object',
+      properties: {
+        patients: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: patientAfterSave,
+          }
+        }
+      }
+    }
+  }
+}
+
 exports.createPatient = {
   description: 'Creates a new patient',
   tags: ['PatientManagement'],
@@ -161,7 +183,3 @@ exports.deletePatient = {
     ...generic401Error,
   }
 }
-
-exports.getPatientByDoctorId = {
-
-};

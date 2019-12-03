@@ -27,9 +27,9 @@ exports.deletePatient = async (req, reply) => {
   }
 };
 
-exports.getPatientsByDoctor = async(req, reply) => {
+exports.getPatientList = async(req, reply) => {
   try {
-    const patients = await PatientManagementService.getPatientsByDoctorId(req.params.id);
+    const patients = await PatientManagementService.getPatientList(req.params.id);
     return {patients};
   } catch (err) {
     throw boomify(err);
