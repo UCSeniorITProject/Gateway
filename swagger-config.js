@@ -4,8 +4,8 @@ exports.options = {
   exposeRoute: true,
   swagger: {
     info: {
-      title: 'Security Management',
-      description: 'Security Management',
+      title: 'Gateway',
+      description: 'API Gateway',
       version: '1.0.0'
     },
     externalDocs: {
