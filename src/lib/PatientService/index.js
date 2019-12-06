@@ -6,12 +6,12 @@ exports.getPatientList = async (doctorId) => {
   try {
     const requestOptions = {
       method: 'GET',
-      uri: `${patientService}/api/patients`,
+      uri: `${patientService}/api/patients?doctorId=${doctorId}`,
       json: true,
     };
 
     const patientRequest = await request(requestOptions);
-    return {...patientRequest};
+    return patientRequest;
   } catch (err) {
     throw boomify(err);
   }

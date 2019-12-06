@@ -1,7 +1,9 @@
 const config = require('../config');
+const qs = require('qs');
 const fastify = require('fastify')({
   logger: config.shouldFastifyLog,
   pluginTimeout: 60000,
+  querystringParser: str => qs.parse(str),
 });
 const swagger = require('../swagger-config');
 const {verifyToken} = require('./lib/SecurityManagementService');

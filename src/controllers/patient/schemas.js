@@ -74,6 +74,12 @@ exports.getPatientList = {
   tags: ['PatientManagement'],
   summary: 'Gets a list of patients to display',
   exposeRoute: true,
+  query: {
+    doctorId: {
+      type: 'number',
+      description: 'The id of the doctor who is looking for patients'
+    }
+  },
   response: {
     200: {
       description: 'Succesfully retrieved a list of patients',
@@ -83,7 +89,20 @@ exports.getPatientList = {
           type: 'array',
           items: {
             type: 'object',
-            properties: patientAfterSave,
+            properties: {
+              userId: {
+                type: 'number',
+                description: 'The user id of the patient',
+              },
+              firstName: {
+                type: 'string',
+                description: 'The first name of the patient',
+              },
+              lastName: {
+                type: 'string',
+                description: 'The last name of the patient',
+              }
+            },
           }
         }
       }

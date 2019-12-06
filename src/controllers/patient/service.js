@@ -1,5 +1,6 @@
 const {boomify} = require('boom');
 const PatientManagementService = require('../../lib/PatientService');
+const SecurityManagementService = require('../../lib/SecurityManagementService');
 
 exports.createPatient = async (req, reply) => {
   try {
@@ -29,8 +30,16 @@ exports.deletePatient = async (req, reply) => {
 
 exports.getPatientList = async(req, reply) => {
   try {
-    const patients = await PatientManagementService.getPatientList(req.params.id);
-    return {patients};
+    const patients = await PatientManagementService.getPatientList(req.query.doctorId);
+    const users = await SecurityManagementService.bulkGetUserById(patients.map(x=>x.userId), req.headers.authorization);
+    console.log(users)
+    return {patients: users.map( x => {
+      return {
+        firstName: x.firstName,
+        lastName: x.lastName,
+        userId: x.id,
+      }
+    })};
   } catch (err) {
     throw boomify(err);
   }

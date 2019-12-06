@@ -27,6 +27,27 @@ exports.login = async (username, password) => {
   }
 };
 
+exports.bulkGetUserById = async (userIds, token) => {
+  try {
+    const requestOptions = {
+      method: 'GET',
+      uri: `${securityManagement}/api/user/bulk?`,
+      query: {
+        id: userIds,
+      },
+      headers: {
+        authorization: token,
+      },
+      json: true,
+    }
+
+    const bulkUserRequest = await request(requestOptions);
+    return bulkUserRequest.users;
+  } catch (err) {
+    throw boomify(err);
+  }
+}
+
 exports.refreshAccessToken = async (refreshToken) => {
   try {
     const requestOptions = {
