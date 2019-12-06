@@ -32,7 +32,7 @@ exports.getPatientList = async(req, reply) => {
   try {
     const patients = await PatientManagementService.getPatientList(req.query.doctorId);
     const users = await SecurityManagementService.bulkGetUserById(patients.map(x=>x.userId), req.headers.authorization);
-    console.log(users)
+
     return {patients: users.map( x => {
       return {
         firstName: x.firstName,
