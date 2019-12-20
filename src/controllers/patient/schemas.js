@@ -202,3 +202,28 @@ exports.deletePatient = {
     ...generic401Error,
   }
 }
+
+exports.getPatientBySSN = {
+  description: 'Gets patients by SSN',
+  tags: ['PatientManagement'],
+  summary: 'Gets a list of patients by SSN',
+  exposeRoute: true,
+  query: {
+    ssn: {
+      type: 'number',
+      description: 'The ssn of patient'
+    }
+  },
+  response: {
+    200: {
+      description: 'Succesfully retrieved a list of patients',
+      type: 'object',
+      properties: {
+        patient: {
+          type: 'object',
+          properties: patientAfterSave,
+        }
+      }
+    }
+  }
+}

@@ -6,5 +6,6 @@ module.exports = (fastify, options, next) => {
   fastify.patch('/patient/:id', {schema: patientSchema.updatePatient}, patientService.updatePatient);
   fastify.delete('/patient/:id', {schema: patientSchema.deletePatient}, patientService.deletePatient);
   fastify.get('/patient/list', {schema: patientSchema.getPatientList}, patientService.getPatientList);
+  fastify.get('/patient', {schema: patientSchema.getPatientBySSN}, patientService.getPatientBySSN)
   next();
 }

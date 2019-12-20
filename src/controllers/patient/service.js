@@ -44,3 +44,13 @@ exports.getPatientList = async(req, reply) => {
     throw boomify(err);
   }
 };
+
+exports.getPatientBySSN = async (req, reply) => {
+  try {
+    const patient = await PatientManagementService.getBySSN(req.query.ssn);
+    console.log(patient)
+    return patient;
+  } catch (err) {
+    throw boomify(err);
+  }
+}

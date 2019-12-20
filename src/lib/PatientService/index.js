@@ -1,6 +1,7 @@
 const request = require('request-promise');
 const {patientService} = require('../../../config').services;
 const {boomify} = require('boom');
+const qs = require('querystring');
 
 exports.getPatientList = async (doctorId) => {
   try {
@@ -78,3 +79,18 @@ exports.updatePatient = async (patientId, fieldsToPatch) => {
     throw boomify(err);
   }
 };
+
+exports.getBySSN = async (ssn) => {
+  try {
+    const requestOption = {
+      method: 'GET',
+      uri: `${patientService}/api/patient?${qs.stringify({ssn})}`,
+      json: true,
+    }
+
+    const patients = await request(requestOption);
+    return {patient: patients};
+  } catch (err) {
+    throw boomify(err);
+  }
+}
