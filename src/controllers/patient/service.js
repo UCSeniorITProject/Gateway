@@ -4,11 +4,24 @@ const SecurityManagementService = require('../../lib/SecurityManagementService')
 
 exports.createPatient = async (req, reply) => {
   try {
-    const patient = await PatientManagementService.createPatient(req.body.patient);
+    const patient = await PatientManagementService.createPatient(req.body.patient); 
+    if(patient.errorMessage){
+      return {patient: {}};
+    }
     return {patient};
   } catch (err) {
     throw boomify(err);
   } 
+}
+
+exports.getPatientByPatientId = async (req, reply) => {
+  try {
+    const patient = await PatientManagementService.getPatientById(req.params.id);
+    console.log(patient)
+    return {patient};
+  } catch (err) {
+    throw boomify(err);
+  }
 }
 
 exports.updatePatient = async (req, reply) => {
@@ -48,7 +61,6 @@ exports.getPatientList = async(req, reply) => {
 exports.getPatientBySSN = async (req, reply) => {
   try {
     const patient = await PatientManagementService.getBySSN(req.query.ssn);
-    console.log(patient)
     return patient;
   } catch (err) {
     throw boomify(err);

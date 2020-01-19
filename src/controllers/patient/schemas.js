@@ -38,10 +38,6 @@ const patientBeforeSave = {
     type: 'string',
     description: 'The state that the patient resides',
   },
-  userId: {
-    type: 'number',
-    description: 'The user ID of the patient',
-  },
   zipCode:{
     type: 'string',
     description: 'The zip code of the patient',
@@ -118,7 +114,10 @@ exports.createPatient = {
     type: 'object',
     description: 'The patient that is being created',
     properties: {
-      patient: patientBeforeSave,
+      patient: {
+        type: 'object',
+        properties: patientBeforeSave
+      },
     }
   },
   exposeRoute: true,
@@ -146,7 +145,10 @@ exports.updatePatient = {
     type: 'object',
     description: 'The patient values to patch',
     properties: {
-      patient: patientBeforeSave
+      patient: {
+        type: 'object',
+        properties: patientBeforeSave,
+      }
     }
   },
   params: {
@@ -202,6 +204,31 @@ exports.deletePatient = {
     ...generic401Error,
   }
 }
+
+exports.getPatientByPatientId = {
+  description: 'Gets patient by patient id',
+  tags: ['PatientManagement'],
+  summary: 'Gets a list of patients with the patient id',
+  exposeRoute: true,
+  params: {
+    id: {
+      type: 'number',
+      description: 'The ID of the patient to find',
+    }
+  },
+  response: {
+    200: {
+      description: 'Succesfully retrieved the patient',
+      type: 'object',
+      properties: {
+        patient: {
+          type: 'object',
+          properties: patientAfterSave,
+        }
+      }
+    },
+  },
+};
 
 exports.getPatientBySSN = {
   description: 'Gets patients by SSN',
