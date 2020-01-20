@@ -4,43 +4,53 @@ const patientBeforeSave = {
   address: {
     type: 'string',
     description: 'The address of the patient',
+    default: null,
   },
   city: {
     type: 'string',
     description: 'The city of the patient',
+    default: null,
   },
   coPayAmount: {
     type: 'string',
     description: 'The co-pay amount of the patient',
+    default: null,
   },
   dob: {
     type: 'string',
     description: 'The date of birth of the patient',
+    default: null,
   },
   gender: {
     type: 'string',
     description: 'The gender of the patient',
+    default: null,
     enum: ['M', 'F'],
   },
   insuranceName: {
     type: 'string',
     description: 'The name of the patient\'\s insurance',
+    default: null,
   },
   planNo: {
     type: 'string',
     description: 'The plan number of the patient\'\s insurance',
+    default: null,
   },
   ssn: {
     type: 'string',
     description: 'The social security number of the user',
+    default: null,
   },
   state: {
     type: 'string',
     description: 'The state that the patient resides',
+    default: null,
   },
   zipCode:{
     type: 'string',
     description: 'The zip code of the patient',
+    default: null,
   }
 };
 
