@@ -67,11 +67,13 @@ const patientAfterSave = {
   patientId: {
     type: 'string',
     description: 'The id of the patient that was created',
+    default: null,
   },
   active: {
     type: 'string',
     description: 'Whether or not the row is active',
     enum: ['Y', 'N'],
+    default: null,
   }
 }; 
 
