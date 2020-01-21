@@ -51,6 +51,11 @@ const patientBeforeSave = {
     type: 'string',
     description: 'The zip code of the patient',
     default: null,
+  },
+  userId:  {
+    type: 'string',
+    description: 'The user id of the patient',
+    default: null,
   }
 };
 
