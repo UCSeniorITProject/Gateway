@@ -47,7 +47,7 @@ const patientBeforeSave = {
     description: 'The state that the patient resides',
     default: null,
   },
-  zipCode:{
+  zipCode: {
     type: 'string',
     description: 'The zip code of the patient',
     default: null,

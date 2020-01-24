@@ -17,7 +17,6 @@ exports.createPatient = async (req, reply) => {
 exports.getPatientByPatientId = async (req, reply) => {
   try {
     const patient = await PatientManagementService.getPatientById(req.params.id);
-    console.log(patient)
     return {patient};
   } catch (err) {
     throw boomify(err);
