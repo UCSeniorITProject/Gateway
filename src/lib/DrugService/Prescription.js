@@ -12,7 +12,7 @@ exports.createPrescription = async (prescriptionInfo) => {
     };
   
     const prescriptionRequest = await request(requestOptions);
-    return prescriptionRequest;
+    return {...prescriptionRequest};
   } catch (err) {
     throw boomify(err);
   }
@@ -28,7 +28,7 @@ exports.patchPrescription = async (prescriptionId, prescriptionInfoToPatch) => {
     };
 
     const prescriptionRequest = await request(requestOptions);
-    return prescriptionRequest;
+    return {...prescriptionRequest};
   } catch (err){
     throw boomify(err);
   }
@@ -43,7 +43,7 @@ exports.deletePrescription = async (prescriptionId) => {
     };
 
     const prescriptionRequest = await request(requestOptions);
-    return prescriptionRequest;
+    return {...prescriptionRequest};
   } catch (err) {
     throw boomify(err);
   }
@@ -58,7 +58,7 @@ exports.getPrescriptionById = async (prescriptionId) => {
     };
 
     const prescriptionRequest = await request(requestOptions);
-    return prescriptionRequest;
+    return {...prescriptionRequest};
   } catch (err) {
     throw boomify(err);
   }

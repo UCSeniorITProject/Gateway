@@ -114,14 +114,14 @@ exports.getPatientList = {
               lastName: {
                 type: 'string',
                 description: 'The last name of the patient',
-              }
+              },
             },
-          }
-        }
-      }
-    }
-  }
-}
+          },
+        },
+      },
+    },
+  },
+};
 
 exports.createPatient = {
   description: 'Creates a new patient',
