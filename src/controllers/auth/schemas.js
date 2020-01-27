@@ -200,7 +200,7 @@ exports.login = {
 
 exports.createUser = {
   description: 'Creates a new user with the given values',
-  tags: ['User'],
+  tags: ['UserManagement'],
   summary: 'Creates a new user with the given request body',
   body: {
     type: 'object',
@@ -232,7 +232,7 @@ exports.createUser = {
 
 exports.getWithFilter = {
   description: 'Gets all users matching the provided filter',
-  tags: ['User'],
+  tags: ['UserManagement'],
   summary: 'Retrieves all users matching the given filter',
   querystring: {
     ...userAfterSave,
@@ -259,7 +259,7 @@ exports.getWithFilter = {
 
 exports.updateUser = {
   description: 'Updates the user with the given request body',
-  tags: ['User'],
+  tags: ['UserManagement'],
   summary: 'Updates the given user with the given request body',
   params: {
     type: 'object',
