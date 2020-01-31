@@ -44,12 +44,13 @@ exports.getPatientList = async(req, reply) => {
   try {
     const patients = await PatientManagementService.getPatientList(req.query.doctorId);
     const users = await SecurityManagementService.bulkGetUserById(patients.map(x=>x.userId), req.headers.authorization);
-
     return {patients: users.map( x => {
       return {
         firstName: x.firstName,
         lastName: x.lastName,
         userId: x.id,
+        gender: patients.filter(y => x.userId === y.userId).gender,
+        dob: patients.filter(y => x.userId = y.userId).dob,
       }
     })};
   } catch (err) {

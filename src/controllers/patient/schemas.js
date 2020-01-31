@@ -115,6 +115,15 @@ exports.getPatientList = {
                 type: 'string',
                 description: 'The last name of the patient',
               },
+              gender: {
+                type: 'string',
+                description: 'The gender of the patient',
+                enum: ['M', 'F'],
+              },
+              dob: {
+                type: 'string',
+                description: 'The date of birth of  the patient',
+              }
             },
           },
         },

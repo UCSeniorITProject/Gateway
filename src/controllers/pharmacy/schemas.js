@@ -122,7 +122,7 @@ exports.patchPharmacy = {
       description: 'Succesfully patched the pharmacy',
       type: 'object',
       properties: {
-        patients: {
+        pharmacy: {
           type: 'object',
           properties: pharmacyAfterSave,
         },
@@ -139,16 +139,16 @@ exports.getPharmacyList = {
   response: {
     200: {
       description: 'Succesfully got a list of all pharmacies',
-      type: 'array',
-      items: {
-        type: 'object',
-        properties: {
-          patients: {
+      type: 'object',
+      properties: {
+        pharmacies: {
+          type: 'array',
+          items: {
             type: 'object',
             properties: pharmacyAfterSave,
           },
-        },
-      },
+        }
+      }
     },
   },
 };

@@ -4,7 +4,7 @@ const {boomify} = require('boom');
 exports.createPharmacy = async (req, reply) => {
   try {
     const pharmacy = await pharmacyRequests.createPharmacy(req.body.pharmacy);
-    return {...pharmacy};
+    return {pharmacy};
   } catch (err) {
     throw boomify(err);
   }
@@ -22,7 +22,7 @@ exports.deletePharmacy = async (req, reply) => {
 exports.patchPharmacy = async (req, reply) => {
   try {
     const pharmacy = await pharmacyRequests.patchPharmacy(req.params.id, req.body.pharmacy);
-    return {...pharmacy};
+    return {pharmacy};
   } catch (err) {
     throw boomify(err);
   }
@@ -31,7 +31,7 @@ exports.patchPharmacy = async (req, reply) => {
 exports.getPharmacyList = async (req, reply) => {
   try {
     const pharmacies = await pharmacyRequests.getPharmacyList();
-    return {...pharmacies};
+    return {pharmacies};
   } catch (err) {
     throw boomify(err);
   }
@@ -40,7 +40,7 @@ exports.getPharmacyList = async (req, reply) => {
 exports.getPharmacyById = async (req, reply) => {
   try {
     const pharmacy = await pharmacyRequests.getPharmacyById(req.params.id);
-    return {...pharmacy};
+    return {pharmacy};
   } catch (err) {
     throw boomify(err);
   }

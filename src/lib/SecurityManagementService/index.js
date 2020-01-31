@@ -32,7 +32,7 @@ exports.bulkGetUserById = async (userIds, token) => {
     const requestOptions = {
       method: 'GET',
       uri: `${securityManagement}/api/user/bulk?`,
-      query: {
+      qs: {
         id: userIds,
       },
       headers: {

@@ -37,14 +37,14 @@ exports.patchPharmacy = async (pharmacyId, pharmacyInfoToPatch) => {
   try {
     const requestOptions = {
       method: 'PATCH',
-      uri:`${drugService}/api/${pharmacyId}`,
+      uri:`${drugService}/api/pharmacy/${pharmacyId}`,
       body: pharmacyInfoToPatch,
       json: true,
     };
-
     const pharmacyRequest = await request(requestOptions);
     return {...pharmacyRequest};
   } catch (err) {
+    console.log(err)
     throw boomify(err);
   }
 }
@@ -58,7 +58,7 @@ exports.getPharmacyList = async () => {
     };
 
     const pharmacyRequest = await request(requestOptions);
-    return {...pharmacyRequest};
+    return pharmacyRequest;
   } catch (err) {
     throw boomify(err);
   }
