@@ -31,7 +31,7 @@ exports.bulkGetUserById = async (userIds, token) => {
   try {
     const requestOptions = {
       method: 'GET',
-      uri: `${securityManagement}/api/user/bulk?`,
+      uri: `${securityManagement}/api/user/bulk`,
       qs: {
         id: userIds,
       },
@@ -125,7 +125,6 @@ exports.getUserWithFilter = async (filter, token) => {
 
 exports.updateUser = async (userID, propertiesToUpdate, token) => {
   try {
-    console.log(userID)
     const requestOptions = {
       method: 'PATCH',
       uri: `${securityManagement}/api/user/${userID}`,
