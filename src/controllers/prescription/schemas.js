@@ -17,25 +17,16 @@ const prescriptionBeforeSave = {
     description: 'Whether or not the prescription is active',
     default: 'Y',
   },
-  pharmacistId: {
-    type: 'number',
-    description: 'The id of the pharmacist who filled the prescription',
-    default: null,
-  },
   pharmacyId: {
     type: 'number',
     description: 'The id of the pharmacy the prescription is being created for',
     default: null,
-  },
-  reasonId: {
-    type: 'number',
-    description: 'The id of the reason for the prescription',
-  },
-  selfDiagnosed: {
-    type: 'string',
-    description: 'Whether or not the issue was self-dianogosed',
-    enum: ['True', 'False'],
-  }
+	},
+	doctorId: {
+		type: 'number',
+		description: 'The id of the doctor that prescribed the prescription',
+		default: null,
+	},
 };
 
 const prescriptionAfterSave = {
@@ -44,7 +35,15 @@ const prescriptionAfterSave = {
     type: 'number',
     description: 'The id of the prescription being created',
     default: null,
-  },
+	},
+	createdAt: {
+		type: 'string',
+		description: 'The time the row was created',
+	},
+	updatedAt: {
+		type: 'string',
+		description: 'The last time the row was updated',
+	}
 };
 
 exports.createPrescription = {

@@ -1,9 +1,8 @@
 const request = require('request-promise');
 const {drugService} = require('../../../config').services;
-const qs = require('query-string');
 const {boomify} = require('boom');
 
-exports.createPrescription = (prescription) => {
+exports.createPrescription = async (prescription) => {
 	try {
 		const requestOptions = {
 			method: 'POST',
@@ -15,13 +14,13 @@ exports.createPrescription = (prescription) => {
 		};
 
 		const prescriptionRequest = await request(requestOptions);
-		return {...prescriptionRequest.prescription};
+		return prescriptionRequest.prescription;
 	} catch (err) {
 		throw boomify(err);
 	}
 };
 
-exports.getPrescriptionWithFilter = (filter) => {
+exports.getPrescriptionWithFilter = async (filter) => {
 	try {
 		const requestOptions = {
 			method: 'GET',
@@ -37,7 +36,7 @@ exports.getPrescriptionWithFilter = (filter) => {
 	}
 };
 
-exports.deletePrescription = (prescriptionId) => {
+exports.deletePrescription = async (prescriptionId) => {
 	try {
 		const requestOptions = {
 			method: 'DELETE',
@@ -51,7 +50,7 @@ exports.deletePrescription = (prescriptionId) => {
 	}
 };
 
-exports.patchPrescription = (prescriptionId, pharmacyFieldsToUpdate) => {
+exports.patchPrescription = async (prescriptionId, pharmacyFieldsToUpdate) => {
 	try {
 		const requestOptions = {
 			method: 'PATCH',

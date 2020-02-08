@@ -1,4 +1,4 @@
-const prescriptionRequests = require('../../lib/DrugService/Prescription');
+const prescriptionRequests = require('../../lib/PharmacyService/Prescription');
 
 exports.createPrescription = async (req, reply)  => {
   try {

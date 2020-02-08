@@ -1,7 +1,7 @@
 const generic401Error = require('../../lib/constants/generic401Error');
 
 const pharmacyBeforeSave = {
-  pharmacyName: {
+  name: {
     type: 'string',
     description: 'The name of the pharmacy',
     default: null,
@@ -131,11 +131,15 @@ exports.patchPharmacy = {
   },
 };
 
-exports.getPharmacyList = {
-  description: 'Gets a list of pharmacies',
+exports.getPharmacyWithFilter = {
+  description: 'Gets a list of pharmacies with a filter',
   tags: ['PharmacyManagement'],
   summary: 'Gets a list of all pharmacies',
-  exposeRoute: true,
+	exposeRoute: true,
+	query: {
+		type: 'object',
+		properties: pharmacyAfterSave
+	},
   response: {
     200: {
       description: 'Succesfully got a list of all pharmacies',

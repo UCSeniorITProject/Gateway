@@ -1,4 +1,4 @@
-const pharmacyRequests = require('../../lib/DrugService/Pharmacy');
+const pharmacyRequests = require('../../lib/PharmacyService/Pharmacy');
 const {boomify} = require('boom');
 
 exports.createPharmacy = async (req, reply) => {
@@ -28,9 +28,9 @@ exports.patchPharmacy = async (req, reply) => {
   }
 };
 
-exports.getPharmacyList = async (req, reply) => {
+exports.getPharmacyWithFilter = async (req, reply) => {
   try {
-    const pharmacies = await pharmacyRequests.getPharmacyList();
+    const pharmacies = await pharmacyRequests.getPharmacyWithFilter(req.query);
     return {pharmacies};
   } catch (err) {
     throw boomify(err);
