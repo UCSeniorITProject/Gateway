@@ -1,4 +1,4 @@
-const activeEnum = require('../constants/activeEnum');
+const activeEnum = require('../../lib/constants/activeEnum');
 
 const drugBeforeSave = {
   name: {
@@ -172,16 +172,16 @@ exports.drugList = {
 exports.drugWithFilter = {
   description: 'Gets a list of drugs with a filter',
   tags: ['Drug'],
-  summary: 'Gets a list of drugs with a filter',
+	summary: 'Gets a list of drugs with a filter',
+	query: {
+		type: 'object',
+		properties: drugAfterSave
+	},
   exposeRoute: true,
   response: {
     200: {
       description: 'Successfully grabbed a list of all drugs with a filter',
       type: 'object',
-      query: {
-        type: 'object',
-        properties: drugAfterSave,
-      },
       properties: {
         drugs: {
           type: 'array',

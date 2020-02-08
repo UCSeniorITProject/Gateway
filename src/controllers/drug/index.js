@@ -6,6 +6,6 @@ module.exports = (fastify, options, next) =>  {
   fastify.delete('/drug/:id', {schema: drugSchema.deleteDrug}, drugService.deleteDrug);
   fastify.patch('/drug/:id', {schema: drugSchema.patchDrug}, drugService.patchDrug);
   fastify.get('/drug/list', {schema: drugSchema.drugList}, drugService.getDrugList);
-  fastify.get('/drug', {schema: drugSchema.drugWithFilter}, drugService.getDrugWithFilter);
+  fastify.get('/drug', {schema: drugSchema.drugWithFilter}, drugService.getDrugsWithFilter);
   next();
 };
