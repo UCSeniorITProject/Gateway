@@ -3,16 +3,17 @@ const {patientService} = require('../../../config').services;
 const {boomify} = require('boom');
 const qs = require('querystring');
  
-exports.getPatientList = async (doctorId) => {
+exports.getPatientWithFilter = async (filter) => {
  try {
    const requestOptions = {
      method: 'GET',
-     uri: `${patientService}/api/patients?doctorId=${doctorId}`,
+		 uri: `${patientService}/api/patient`,
+		 qs: filter,
      json: true,
    };
- 
-   const patientRequest = await request(requestOptions);
-   return patientRequest;
+	 
+	 const patientRequest = await request(requestOptions);
+   return patientRequest.patients;
  } catch (err) {
    throw boomify(err);
  }
@@ -24,13 +25,13 @@ exports.createPatient = async (patient) => {
      method: 'POST',
      uri: `${patientService}/api/patient`,
      body: {
-       ...patient,
+       patient,
      },
      json: true,
     };
  
     const newPatient = await request(requestOptions);
-    return {...newPatient};
+    return newPatient.patient;
  } catch (err) {
    throw boomify(err);
  }
@@ -48,20 +49,6 @@ exports.deletePatient = async (patientId) => {
  }
 }
  
-exports.getPatientById = async(patientId) => {
- try {
-   const requestOption = {
-     method: 'GET',
-     uri: `${patientService}/api/patient/${patientId}`,
-     json: true,
-   }
-   const patient = await request(requestOption);
-   return {...patient}
- } catch (err) {
-   throw boomify(err);
- }
-};
- 
 exports.updatePatient = async (patientId, fieldsToPatch) => {
  try {
    const requestOption = {
@@ -69,7 +56,7 @@ exports.updatePatient = async (patientId, fieldsToPatch) => {
      uri: `${patientService}/api/patient/${patientId}`,
      json: true,
      body: {
-       ...fieldsToPatch,
+       patient: fieldsToPatch,
      }
    };
  
@@ -80,18 +67,5 @@ exports.updatePatient = async (patientId, fieldsToPatch) => {
  }
 };
  
-exports.getBySSN = async (ssn) => {
- try {
-   const requestOption = {
-     method: 'GET',
-     uri: `${patientService}/api/patient?${qs.stringify({ssn})}`,
-     json: true,
-   }
- 
-   const patients = await request(requestOption);
-   return {patient: patients};
- } catch (err) {
-   throw boomify(err);
- }
-}
+
 
