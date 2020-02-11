@@ -41,7 +41,13 @@ exports.deletePatient = async (req, reply) => {
 exports.getPatientWithFilter = async(req, reply) => {
   try {
     const patients = await PatientManagementService.getPatientWithFilter(req.query.doctorId);
-		return {patients};
+    const users = await SecurityManagementService.bulkGetUserById(patients.map(x=>x.patientUserId), req.headers.authorization);
+		return {patients: patients.map( x=> {
+      const user = users.filter(y=>y.id===x.patientUserId);
+      return {
+        ...x, firstName: user[0].firstName, lastName: user[0].lastName,
+      };
+    })};
   } catch (err) {
     throw boomify(err);
   }

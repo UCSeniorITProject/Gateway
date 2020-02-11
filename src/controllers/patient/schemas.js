@@ -175,7 +175,15 @@ exports.getPatientWithFilter = {
           type: 'array',
           items: {
             type: 'object',
-            properties: patientAfterSave,
+            properties: {
+              ...patientAfterSave,
+              firstName: {
+                type: 'string',
+              },
+              lastName: {
+                type: 'string',
+              }
+            },
           },
         },
       },
