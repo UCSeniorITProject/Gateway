@@ -125,7 +125,7 @@ exports.patchPatient = {
   body: {
     type: 'object',
     properties: {
-      pharmacy: {
+      patient: {
         type: 'object',
         properties: patientBeforeSave,
       },
