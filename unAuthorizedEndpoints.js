@@ -3,6 +3,10 @@ exports.unAuthorizedEndpoints = [{
   url: '/api/security-management/user',
 },
 {
+  method: 'POST',
+  url: '/api/security-management/token/refresh',
+},
+{
   method: 'GET',
   url: '/api/security-management/user',
 },
@@ -33,10 +37,6 @@ exports.unAuthorizedEndpoints = [{
 {
   method: 'GET',
   url: '/documentation/static/favicon-16x16.png',
-},
-{
-  method: 'GET',
-  url: '/documentation',
 },
 {
   method: 'GET',
