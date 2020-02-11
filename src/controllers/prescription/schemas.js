@@ -4,12 +4,10 @@ const prescriptionBeforeSave = {
   doctorId: {
     type: 'number',
     description: 'The ID of the doctor that prescribed the medicine',
-    default: null,
   },
   patientId: {
     type: 'number',
     description: 'The ID of the patient that was prescribed the medicine',
-    default: null,
   },
   active: {
     type: 'string',
@@ -20,12 +18,10 @@ const prescriptionBeforeSave = {
   pharmacyId: {
     type: 'number',
     description: 'The id of the pharmacy the prescription is being created for',
-    default: null,
 	},
 	doctorId: {
 		type: 'number',
 		description: 'The id of the doctor that prescribed the prescription',
-		default: null,
 	},
 };
 

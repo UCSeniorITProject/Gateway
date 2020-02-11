@@ -4,32 +4,26 @@ const pharmacyBeforeSave = {
   name: {
     type: 'string',
     description: 'The name of the pharmacy',
-    default: null,
   },
   zipCode: {
     type: 'string',
     description: 'The zipcode of the pharmacy',
-    default: null,
   },
   address: {
     type: 'string',
     description: 'The address of the pharmacy',
-    default: null,
   },
   city: {
     type: 'string',
     description: 'The city of the pharmacy',
-    default: null,
   },
   state: {
     type: 'string',
     description: 'The state of the pharmacy',
-    default: null,
   },
   active: {
     type: 'string',
     description: 'Whether or not the pharmacy is active',
-    default: null,
     enum: ['Y', 'N'],
   },
 };
