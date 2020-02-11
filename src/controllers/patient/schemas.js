@@ -118,7 +118,7 @@ exports.patchPatient = {
     properties: {
       id: {
         type: 'number',
-        description: 'The ID of the patient to patch',
+        description: 'The ID of the patient to delete',
       },
     },
   },
