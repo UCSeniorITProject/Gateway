@@ -41,4 +41,8 @@ exports.unAuthorizedEndpoints = [{
 {
   method: 'GET',
   url: '/documentation/json',
+},
+{
+  method: 'GET',
+  url: '/documentation',
 }];

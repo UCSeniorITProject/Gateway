@@ -109,17 +109,17 @@ exports.deletePatient = {
 };
 
 exports.patchPatient = {
-  description: 'Patches a patient with the given ID',
+  description: 'Patches the patient based on the provided ID and body',
   tags: ['Patient'],
-  summary: 'Patches a patient with the given  ID',
+  summary: 'Patches the patient with the given ID and applies the given body',
   params: {
     type: 'object',
     required: ['id'],
     properties: {
       id: {
         type: 'number',
-        description: 'The ID of the patient to delete',
-      },
+        description: 'The ID of the patient to patch',
+      }
     },
   },
   body: {
@@ -128,33 +128,31 @@ exports.patchPatient = {
       patient: {
         type: 'object',
         properties: patientBeforeSave,
+      }
+    }
+  },
+  exposeRoute: true,
+  200: {
+    description: 'Successfully patched the patient',
+    type: 'object',
+    properties: {
+      patient: {
+        type: 'object',
+        properties: patientAfterSave,
+        description: 'The patched patient',
+      }
+    }
+  },
+  404: {
+    description: 'The patient was not found',
+    type: 'object',
+    properties: {
+      msg: {
+        type: 'string',
+        default: 'The patient was not found',
       },
     },
   },
-  exposeRoute: true,
-  response: {
-    200: {
-      description: 'Succesfully patched the patient',
-      type: 'object',
-      properties: {
-        patient: {
-          type: 'string',
-          properties: patientAfterSave,
-          description: 'The patient that was patched',
-        },
-      },
-    },
-    404: {
-      description: 'The patient was not found',
-      type: 'object',
-      properties: {
-        msg: {
-          type: 'string',
-          default: 'The patient was not found',
-        },
-      }, 
-    }
-  }
 };
 
 exports.getPatientWithFilter = {

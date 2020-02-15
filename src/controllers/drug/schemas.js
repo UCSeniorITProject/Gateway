@@ -123,6 +123,15 @@ exports.patchDrug = {
       }
     },
   },
+  body: {
+    type: 'object',
+    properties: {
+      drug: {
+        type: 'object',
+        properties: drugBeforeSave,
+      }
+    }
+  },
   exposeRoute: true,
   200: {
     description: 'Successfully patched the drug',
