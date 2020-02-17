@@ -1,4 +1,5 @@
 const prescriptionRequests = require('../../lib/PharmacyService/Prescription');
+const {boomify} = require('boom');
 
 exports.createPrescription = async (req, reply)  => {
   try {
