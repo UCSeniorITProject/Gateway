@@ -184,7 +184,7 @@ exports.drugWithFilter = {
 	summary: 'Gets a list of drugs with a filter',
 	query: {
 		type: 'object',
-		properties: drugAfterSave
+		properties: {...drugAfterSave, ids: {type: 'array', items: {type:'number'}}}
 	},
   exposeRoute: true,
   response: {
