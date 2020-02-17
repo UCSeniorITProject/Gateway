@@ -197,55 +197,10 @@ exports.login = {
   },
 };
 
-exports.refreshToken = {
-  description: 'Refresh the given access token',
-  tags: ['SecurityManagement'],
-  summary: 'Refreshes the given access token with the refresh token',
-  body: {
-    type:'object',
-    description: 'The refresh token to validate',
-    required: ['refreshToken'],
-    properties: {
-      refreshToken: {
-        type: 'string',
-        description: 'The refresh token',
-      },
-    },
-  },
-  exposeRoute: true,
-  response: {
-    200: {
-      description: 'Successfully granted auth token',
-      type: 'object',
-      properties: {
-        accessToken: {
-          type: 'string',
-          description: 'The new auth token that was granted',
-        },
-        refreshToken: {
-          type: 'string',
-          description: 'The refresh token was granted',
-        },
-      }
-    },
-    401: {
-      description: 'Bad authorization data',
-      type: 'object',
-      properties: {
-        msg: {
-          type: 'string',
-          description: 'The message returned by the API',
-          default: 'Invalid username or password',
-        }
-      },
-    },
-    ...generic401Error,
-  },
-};
 
 exports.createUser = {
   description: 'Creates a new user with the given values',
-  tags: ['User'],
+  tags: ['UserManagement'],
   summary: 'Creates a new user with the given request body',
   body: {
     type: 'object',
@@ -277,7 +232,7 @@ exports.createUser = {
 
 exports.getWithFilter = {
   description: 'Gets all users matching the provided filter',
-  tags: ['User'],
+  tags: ['UserManagement'],
   summary: 'Retrieves all users matching the given filter',
   querystring: {
     ...userAfterSave,
@@ -304,7 +259,7 @@ exports.getWithFilter = {
 
 exports.updateUser = {
   description: 'Updates the user with the given request body',
-  tags: ['User'],
+  tags: ['UserManagement'],
   summary: 'Updates the given user with the given request body',
   params: {
     type: 'object',
@@ -344,6 +299,41 @@ exports.updateUser = {
           default: 'The user was not found',
         }
       },
+    },
+    ...generic401Error,
+  },
+};
+
+exports.refreshToken = {
+  description: 'Refresh the given access token',
+  tags: ['SecurityManagement'],
+  summary: 'Refreshes the given access token with the refresh token',
+  body: {
+    type:'object',
+    description: 'The refresh token to validate',
+    required: ['refreshToken'],
+    properties: {
+      refreshToken: {
+        type: 'string',
+        description: 'The refresh token',
+      },
+    },
+  },
+  exposeRoute: true,
+  response: {
+    200: {
+      description: 'Successfully granted auth token',
+      type: 'object',
+      properties: {
+        accessToken: {
+          type: 'string',
+          description: 'The new auth token that was granted',
+        },
+        refreshToken: {
+          type: 'string',
+          description: 'The refresh token was granted',
+        },
+      }
     },
     ...generic401Error,
   },

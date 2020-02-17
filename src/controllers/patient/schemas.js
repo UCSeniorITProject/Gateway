@@ -1,144 +1,78 @@
-const generic401Error = require('../../lib/constants/generic401Error');
+const activeEnum = require('../../lib/constants/activeEnum');
 
 const patientBeforeSave = {
-  address: {
-    type: 'string',
-    description: 'The address of the patient',
-  },
-  city: {
-    type: 'string',
-    description: 'The city of the patient',
-  },
-  coPayAmount: {
-    type: 'string',
-    description: 'The co-pay amount of the patient',
-  },
-  dob: {
-    type: 'string',
-    description: 'The date of birth of the patient',
-  },
-  gender: {
-    type: 'string',
-    description: 'The gender of the patient',
-    enum: ['M', 'F'],
-  },
-  insuranceName: {
-    type: 'string',
-    description: 'The name of the patient\'\s insurance',
-  },
-  planNo: {
-    type: 'string',
-    description: 'The plan number of the patient\'\s insurance',
-  },
-  ssn: {
-    type: 'string',
-    description: 'The social security number of the user',
-  },
-  state: {
-    type: 'string',
-    description: 'The state that the patient resides',
-  },
-  userId: {
-    type: 'number',
-    description: 'The user ID of the patient',
-  },
-  zipCode:{
-    type: 'string',
-    description: 'The zip code of the patient',
-  }
+	patientUserId: {
+		type: 'number',
+		description: 'The user id of the patient in the database',
+	},
+	socialSecurityNumber: {
+		type: 'string',
+		description: 'The social security number of the patient',
+	},
+	dateOfBirth :{
+		type: 'string',
+		description: 'The date of birth of the patient',
+	},
+	gender: {
+		type: 'string',
+		description: 'The gender of the patient',
+		enum: ['M', 'F'],
+	},
+	address: {
+		type: 'string',
+		description: 'The street address of the patient',
+	},
+	city: {
+		type: 'string',
+		description: 'The city of the patient',
+	},
+	state: {
+		type: 'string',
+		description: 'The state that the patient resides in',
+	},
+	zipCode: {
+		type: 'string',
+		description: 'The zip code the patient resides in',
+	},
+	insuranceName: {
+		type: 'string',
+		description: 'The name of the patient\'s insurance provider',
+	},
+	insurancePlanNo: {
+		type: 'string',
+		description: 'The plan number of the patient\'s insurance',
+	},
+	insuranceCoPayAmount: {
+		type: 'string',
+		description: 'The co-pay amount of the patient\'s insurance',
+	},
+	active: {
+		type: 'string',
+		enum: activeEnum,
+		description: 'Whether or not the patient is active',
+	},
 };
 
 const patientAfterSave = {
-  ...patientBeforeSave,
-  updatedAt: {
-    type: 'string',
-    description: 'The last time the row was updated',
-  },
-  createdAt: {
-    type: 'string',
-    description: 'The date the patient row was created',
-  },
-  patientId: {
-    type: 'string',
-    description: 'The id of the patient that was created',
-  },
-  active: {
-    type: 'string',
-    description: 'Whether or not the row is active',
-    enum: ['Y', 'N'],
-  }
-}; 
-
-exports.createPatient = {
-  description: 'Creates a new patient',
-  tags: ['PatientManagement'],
-  summary: 'Creates a new patient with the given values',
-  body: {
-    type: 'object',
-    description: 'The patient that is being created',
-    properties: {
-      patient: patientBeforeSave,
-    }
-  },
-  exposeRoute: true,
-  response: {
-    200: {
-      description: 'Succesfully created the patient',
-      type: 'object',
-      properties: {
-        patient: {
-          type: 'object',
-          properties: patientAfterSave,
-          description: 'The newly created patient',
-        },
-      }
-    },
-    ...generic401Error,
-  }
-};
-
-exports.updatePatient = {
-  description: 'Patches a patient',
-  tags: ['PatientManagement'],
-  summary: 'Patches a patient with the given values',
-  body: {
-    type: 'object',
-    description: 'The patient values to patch',
-    properties: {
-      patient: patientBeforeSave
-    }
-  },
-  params: {
-    type: 'object',
-    required: ['id'],
-    properties: {
-      id: {
-        type: 'number',
-        description: 'The ID of the patient to update',
-      }
-    },
-  },
-  exposeRoute: true,
-  response: {
-    200: {
-      description: 'Succesfully patched the patient',
-      type: 'object',
-      properties: {
-        patient: {
-          type: 'object',
-          properties: patientAfterSave,
-          description: 'Thew newly updated patient',
-        },
-      }
-    },
-    ...generic401Error, 
-  }
+	...patientBeforeSave,
+	patientId: {
+		type: 'string',
+		description: 'The id of the patient row',
+	},
+	createdAt: {
+		type: 'string',
+		description: 'The date the patient was created',
+	},
+	updatedAt: {
+		type: 'string',
+		description: 'The last time the patient was updated',
+	},
 };
 
 exports.deletePatient = {
-  description: 'Deletes the patient',
-  tags: ['SecurityManagement'],
-  summary: 'Deletes the patient',
+  description: 'Deletes a patient with the given ID',
+  tags: ['Patient'],
+  summary: 'Deletes a patient with the given  ID',
   params: {
     type: 'object',
     required: ['id'],
@@ -146,22 +80,141 @@ exports.deletePatient = {
       id: {
         type: 'number',
         description: 'The ID of the patient to delete',
-      }
+      },
     },
   },
   exposeRoute: true,
   response: {
     204: {
-      description: 'The patient was succesfully deleted',
+      description: 'Succesfully deleted the patient',
       type: 'object',
       properties: {
+        msg: {
+          type: 'string',
+          default: 'Succesfully deleted the patient'
+        },
+      },
+    },
+    404: {
+      description: 'The patient was not found',
+      type: 'object',
+      properties: {
+        msg: {
+          type: 'string',
+          default: 'The patient was not found',
+        },
+      }, 
+    },
+  },
+};
 
+exports.patchPatient = {
+  description: 'Patches the patient based on the provided ID and body',
+  tags: ['Patient'],
+  summary: 'Patches the patient with the given ID and applies the given body',
+  params: {
+    type: 'object',
+    required: ['id'],
+    properties: {
+      id: {
+        type: 'number',
+        description: 'The ID of the patient to patch',
       }
     },
-    ...generic401Error,
+  },
+  body: {
+    type: 'object',
+    properties: {
+      patient: {
+        type: 'object',
+        properties: patientBeforeSave,
+      }
+    }
+  },
+  exposeRoute: true,
+  200: {
+    description: 'Successfully patched the patient',
+    type: 'object',
+    properties: {
+      patient: {
+        type: 'object',
+        properties: patientAfterSave,
+        description: 'The patched patient',
+      }
+    }
+  },
+  404: {
+    description: 'The patient was not found',
+    type: 'object',
+    properties: {
+      msg: {
+        type: 'string',
+        default: 'The patient was not found',
+      },
+    },
+  },
+};
+
+exports.getPatientWithFilter = {
+  description: 'Gets all patient that match the given filter',
+  tags: ['Patient'],
+  summary: 'Grabs all patient that match the given filter',
+  query: {
+    type: 'object',
+    properties: patientAfterSave,
+  },
+  exposeRoute: true,
+  response: {
+    200: {
+      type: 'object',
+      description: 'Succesfully got a list of all patients',
+      properties: {
+        patients: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              ...patientAfterSave,
+              firstName: {
+                type: 'string',
+              },
+              lastName: {
+                type: 'string',
+              }
+            },
+          },
+        },
+      },
+    },
   }
-}
+};
 
-exports.getPatientByDoctorId = {
-
+exports.createPatient = {
+  description: 'Creates a patient with the given body',
+  tags: ['Patient'],
+  summary: 'Creates a patient and applies the given body',
+  body: {
+    type: 'object',
+    description: 'The patient to create',
+    properties: {
+      patient: {
+        type: 'object',
+        properties: patientBeforeSave,
+      }
+    }
+  },
+  exposeRoute: true,
+  response: {
+    200: {
+      description: 'The patient to create',
+      type: 'object',
+      properties: {
+        patient: {
+          type: 'object',
+          properties: patientAfterSave,
+          description: 'The patient that was saved',
+        },
+      },
+    },
+  },
 };

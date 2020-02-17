@@ -1,7 +1,9 @@
 const config = require('../config');
+const qs = require('qs');
 const fastify = require('fastify')({
   logger: config.shouldFastifyLog,
   pluginTimeout: 60000,
+  querystringParser: str => qs.parse(str),
 });
 const swagger = require('../swagger-config');
 const {verifyToken} = require('./lib/SecurityManagementService');
@@ -33,10 +35,13 @@ const {unAuthorizedEndpoints} = require('../unAuthorizedEndpoints');
       }
     });
 
-    fastify.register(require('fastify-swagger'), swagger.options);
-    fastify.register(require('./controllers/auth'), {prefix: '/api/security-management'});
-    fastify.register(require('./controllers/patient'), {prefix: '/api/patient-service'});
-    await fastify.listen(config.port, config.serverHost);
+	fastify.register(require('fastify-swagger'), swagger.options);
+	fastify.register(require('./controllers/auth'), {prefix: '/api/security-management'});
+	fastify.register(require('./controllers/pharmacy'), {prefix: '/api/pharmacy-service'});
+	fastify.register(require('./controllers/drug'), {prefix: '/api/pharmacy-service'});
+	fastify.register(require('./controllers/prescription'), {prefix: '/api/prescription-service'});   
+	fastify.register(require('./controllers/patient'), {prefix: '/api/patient-service'});
+	await fastify.listen(config.port, config.serverHost);
     fastify.swagger();
     fastify.log.info(`Server is listening on ${fastify.server.address().port}`);
   } catch (err) {

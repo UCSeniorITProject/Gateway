@@ -1,13 +1,24 @@
 const {boomify} = require('boom');
 const PatientManagementService = require('../../lib/PatientService');
+const SecurityManagementService = require('../../lib/SecurityManagementService');
 
 exports.createPatient = async (req, reply) => {
   try {
-    const patient = await PatientManagementService.createPatient(req.body.patient);
+    const patient = await PatientManagementService.createPatient(req.body.patient); 
+		console.log(patient)
     return {patient};
   } catch (err) {
     throw boomify(err);
   } 
+}
+
+exports.getPatientByPatientId = async (req, reply) => {
+  try {
+    const patient = await PatientManagementService.getPatientById(req.params.id);
+    return {patient};
+  } catch (err) {
+    throw boomify(err);
+  }
 }
 
 exports.updatePatient = async (req, reply) => {
@@ -27,11 +38,18 @@ exports.deletePatient = async (req, reply) => {
   }
 };
 
-exports.getPatientsByDoctor = async(req, reply) => {
+exports.getPatientWithFilter = async(req, reply) => {
   try {
-    const patients = await PatientManagementService.getPatientsByDoctorId(req.params.id);
-    return {patients};
+    const patients = await PatientManagementService.getPatientWithFilter(req.query);
+    const users = await SecurityManagementService.bulkGetUserById(patients.map(x=>x.patientUserId), req.headers.authorization);
+		return {patients: patients.map( x=> {
+      const user = users.filter(y=>y.id===x.patientUserId);
+      return {
+        ...x, firstName: user[0].firstName, lastName: user[0].lastName,
+      };
+    })};
   } catch (err) {
     throw boomify(err);
   }
 };
+
