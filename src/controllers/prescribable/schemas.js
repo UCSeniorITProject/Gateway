@@ -22,6 +22,10 @@ const prescribableBeforeSave = {
     enum: ['M', 'F'],
     description: 'The gender the prescribable was made for',
   },
+  name: {
+    type: 'string',
+    description: 'The name of the prescribable',
+  },
   drugId: {
     type: 'number',
     description: 'The id of the related drug',
