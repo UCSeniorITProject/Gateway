@@ -21,6 +21,10 @@ const prescribableBeforeSave = {
     type: 'string',
     description: 'The gender the prescribable was made for',
   },
+  directions: {
+    type: 'string',
+    description: 'How the prescribable should be taken',
+  },
   name: {
     type: 'string',
     description: 'The name of the prescribable',
