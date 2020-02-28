@@ -31,7 +31,9 @@ exports.deletePrescriptionReason = async (req, reply) => {
 
 exports.getPrescriptionReasonsWithFilter = async (req, reply) => {
   try {
+		const prescriptionReasons = await prescriptionReasonRequests.getPrescriptionReasonWithFilter(req.query);
 
+		return {prescriptionReasons};
   } catch (err) {
     throw boomify(err);
   }
