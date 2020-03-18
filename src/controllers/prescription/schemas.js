@@ -19,10 +19,6 @@ const prescriptionBeforeSave = {
     type: 'number',
     description: 'The id of the pharmacy the prescription is being created for',
 	},
-	doctorId: {
-		type: 'number',
-		description: 'The id of the doctor that prescribed the prescription',
-	},
 };
 
 const prescriptionAfterSave = {
