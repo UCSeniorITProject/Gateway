@@ -8,7 +8,7 @@ const prescriptionBeforeSave = {
   patientId: {
     type: 'number',
     description: 'The ID of the patient that was prescribed the medicine',
-  },
+	},
   active: {
     type: 'string',
     enum: ['Y', 'N'],

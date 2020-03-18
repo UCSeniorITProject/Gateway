@@ -42,7 +42,8 @@ const {unAuthorizedEndpoints} = require('../unAuthorizedEndpoints');
 	fastify.register(require('./controllers/pharmacy'), {prefix: '/api/pharmacy-service'});
 	fastify.register(require('./controllers/drug'), {prefix: '/api/pharmacy-service'});
 	fastify.register(require('./controllers/prescription'), {prefix: '/api/pharmacy-service'});   
-  fastify.register(require('./controllers/patient'), {prefix: '/api/patient-service'});
+	fastify.register(require('./controllers/patient'), {prefix: '/api/patient-service'});
+	fastify.register(require('./controllers/prescriptionPrescribableDrug'), {prefix: '/api/prescription-prescribable-drug'})
 
 	await fastify.listen(config.port, config.serverHost);
     fastify.swagger();
