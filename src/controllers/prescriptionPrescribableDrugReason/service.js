@@ -1,7 +1,7 @@
 const prescriptionPrescribableDrugReasonService = require('../../lib/PharmacyService/PrescriptionPrescribableDrugReason');
 const {boomify} = require('boom');
 
-exports.createPrescriptionPrescribableDrugReason = (req, reply) => {
+exports.createPrescriptionPrescribableDrugReason = async (req, reply) => {
 	try {
 		const prescriptionPrescribableDrugReason = await prescriptionPrescribableDrugReasonService.createPrescriptionPrescribableDrugReason(req.body.prescriptionPrescribableDrugReason);
 

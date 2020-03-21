@@ -2,17 +2,17 @@ const request = require('request-promise');
 const {drugService} = require('../../../config').services;
 const {boomify} = require('boom');
 
-exports.createPrescriptionPrescribableDrug = async (prescriptionPrescribableDrug) => {
+exports.createPrescriptionPrescribableDrug = async (prescriptionPrescribableDrug, patientId) => {
 	try {
 		const requestOptions = {
 			method: 'POST',
-			uri: `${drugService}/api`,
-			body: prescriptionPrescribableDrug,
+			uri: `${drugService}/api/prescription-prescribable-drug/${patientId}`,
+			body: {prescriptionPrescribableDrug},
 			json: true,
 		};
 
-		const prescriptionPrescribableDrug = await request(requestOptions);
-		return prescriptionPrescribableDrug.prescriptionPrescribableDrug;
+		const prescriptionPrescribableDrugToCreate = await request(requestOptions);
+		return prescriptionPrescribableDrugToCreate.prescriptionPrescribableDrug;
 	} catch (err) {
 		throw boomify(err);
 	}
