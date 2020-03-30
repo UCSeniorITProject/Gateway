@@ -26,11 +26,21 @@ exports.patchPrescription = async (req, reply) => {
 
 exports.deletePrescription = async (req, reply) => {
   try {
-      await prescriptionRequests.deletePrescription(req.params.id);
-      return {};
+		await prescriptionRequests.deletePrescription(req.params.id);
+		return {};
   } catch (err) {
     throw boomify(err);
   }
+};
+
+exports.getPrescriptionsAggregatedByMonthForYear = async (req, reply) => {
+	try {
+		const prescriptionsByMonth = await prescriptionRequests.getPrescriptionsAggregatedByMonthForYear(req.params.patientId);
+
+		return {data: prescriptionsByMonth};
+	} catch (err) {
+		throw boomify(err);
+	}
 };
 
 exports.getPrescription = async (req, reply) => {
