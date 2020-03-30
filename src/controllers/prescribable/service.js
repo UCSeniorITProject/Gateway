@@ -40,3 +40,13 @@ exports.getPrescribableWithFilter = async (req, reply) => {
     throw boomify(err);
   }
 };
+
+exports.getPrescribableByMonth = async (req, reply) => {
+	try {
+		const prescribableByMonth = await prescribableRequest.getPrescribablesPerMonth(req.params.patientId);
+		
+		return {data: prescribableByMonth};
+	} catch (err) {
+		throw boomify(err);
+	}
+};

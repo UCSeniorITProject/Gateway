@@ -29,6 +29,24 @@ exports.deletePrescriptionReason = async (req, reply) => {
   }
 };
 
+exports.getPrescriptionReasonByPrescribable = async (req, reply) => {
+	try {
+		const prescriptionReasonsByPrescribable = await prescriptionReasonRequests.getPrescriptionReasonByPrescribable(req.params.patientId);
+		return {data: prescriptionReasonsByPrescribable};
+	} catch (err) {
+		throw boomify(err);
+	}
+};
+
+exports.getPrescriptionReasonCount = async (req, reply) => {
+	try {
+		const prescriptionReasonCount = await prescriptionReasonRequests.getPrescriptionReasounCount(req.params.patientId);
+		return {data: prescriptionReasonCount}
+	} catch (err) {
+		throw boomify(err);
+	}
+};
+
 exports.getPrescriptionReasonsWithFilter = async (req, reply) => {
   try {
 		const prescriptionReasons = await prescriptionReasonRequests.getPrescriptionReasonWithFilter(req.query);

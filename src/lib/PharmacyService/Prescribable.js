@@ -20,6 +20,21 @@ exports.createPrescribable = async (prescribable) => {
   }
 };
 
+exports.getPrescribablesPerMonth = async (patientId) => {
+	try {
+		const requestOptions = {
+			method: 'GET',
+			uri: `${drugService}/api/prescribable/${patientId}/by-month`,
+			json: true,
+		};
+
+		const prescribablesByMonth = await request(requestOptions);
+		return prescribablesByMonth.data;
+	} catch (err) {
+		throw boomify(err);
+	}
+}
+
 exports.getPrescribableWithFilter = async (filter) => {
   try {
     const requestOptions = {

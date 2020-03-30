@@ -70,6 +70,48 @@ exports.createPrescription = {
   },
 };
 
+
+exports.getPrescriptionsByMonthForPatient = {
+	description: 'Gets the list of prescriptions by month for the patient',
+	tags: ['Prescription'],
+	summary: 'Gets the list of prescriptions by month for the patient',
+	exposeRoute: true,
+	params: {
+    type: 'object',
+    required: ['patientId'],
+    properties: {
+      patientId: {
+        type: 'number',
+        description: 'The ID of the prescription to delete',
+      }
+    },
+  },
+	response: {
+		200: {
+			description: 'The list of the prescriptions by month',
+			type: 'object',
+			properties: {
+				data: {
+					type: 'array',
+					items: {
+						type: 'object',
+						properties: {
+							createdAt: {
+								type: 'string',
+								description: 'The grouped by aggregate date of the prescriptions by month'
+							},
+							numPrescriptions: {
+								type: 'number',
+								description: 'The number of prescriptions in that specific month',
+							}
+						}
+					}
+				},
+			},
+		},
+	},
+};
+
 exports.deletePrescription = {
   description: 'Deletes the prescription with the given filtr',
   tags: ['PrescriptionManagement'],

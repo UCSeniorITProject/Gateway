@@ -50,6 +50,17 @@ exports.deletePrescription = async (prescriptionId) => {
 	}
 };
 
+exports.getPrescriptionsAggregatedByMonthForYear = async (patientId) => {
+	const requestOptions = {
+		method: 'GET',
+		uri: `${drugService}/api/prescription/${patientId}/month`,
+		json: true,
+	};
+
+	const data = await request(requestOptions);
+	return data.data;
+};
+
 exports.patchPrescription = async (prescriptionId, pharmacyFieldsToUpdate) => {
 	try {
 		const requestOptions = {

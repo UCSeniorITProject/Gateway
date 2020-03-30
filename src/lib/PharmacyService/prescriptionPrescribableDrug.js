@@ -16,4 +16,34 @@ exports.createPrescriptionPrescribableDrug = async (prescriptionPrescribableDrug
 	} catch (err) {
 		throw boomify(err);
 	}
-}
+};
+
+exports.getPrescriptionPrescribableDrugCountForLastYear = async (patientId) => {
+	try {
+		const requestOptions = {
+			method: 'GET',
+			uri: `${drugService}/api/prescription-prescribable-drug/patient/${patientId}/prescribable-count`,
+			json: true,
+		};
+
+		const prescriptionsPrescribableDrugs = await request(requestOptions);
+		return prescriptionsPrescribableDrugs.data;
+	} catch (err){
+		throw boomify(err);
+	};
+};
+
+exports.getCountOfPrescribablesPerDoctor = async (patientId) => {
+	try {
+		const requestOptions = {
+			method: 'GET',
+			uri: `${drugService}/api/prescription-prescribable-drug/patient/${patientId}/doctor-count`,
+			json: true,
+		};
+
+		const countOfPrescribablesPerDoctor = await request(requestOptions);
+		return countOfPrescribablesPerDoctor.data;
+	} catch (err){
+		throw boomify(err);
+	}
+};
