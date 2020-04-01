@@ -31,10 +31,7 @@ exports.bulkGetUserById = async (userIds, token) => {
   try {
     const requestOptions = {
       method: 'GET',
-      uri: `${securityManagement}/api/user/bulk`,
-      qs: {
-        id: userIds,
-      },
+      uri: `${securityManagement}/api/user/bulk?${qs.stringify({id:userIds})}`,
       headers: {
         authorization: token,
       },
@@ -44,6 +41,7 @@ exports.bulkGetUserById = async (userIds, token) => {
     const bulkUserRequest = await request(requestOptions);
     return bulkUserRequest.users;
   } catch (err) {
+		console.log(err)
     throw boomify(err);
   }
 }
