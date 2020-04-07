@@ -10,3 +10,12 @@ exports.createPrescriptionPrescribableDrugReason = async (req, reply) => {
 		throw boomify(err);
 	}
 };
+
+exports.getPrescriptionPrescribableDrugReasonBreakdown = async (req, reply) => {
+	try {
+		const prescriptionPrescribableDrugReasonBreakdown = await prescriptionPrescribableDrugReasonService.getPrescriptionPrescribableDrugReasonBreakdown(req.params.doctorId);
+		return {data: prescriptionPrescribableDrugReasonBreakdown}
+	} catch (err) {
+		throw boomify(err);
+	}
+};

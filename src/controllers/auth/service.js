@@ -49,7 +49,7 @@ exports.getUserWithFilter = async(req, reply) => {
   }
 };
 
-exports.updateUser = async(req, reply) => {
+exports.updateUser = async (req, reply) => {
   try {
     const user = await SecurityManagementService.updateUser(req.params.id, req.body, req.headers.authorization);
     return {user};
@@ -57,3 +57,12 @@ exports.updateUser = async(req, reply) => {
     throw boomify(err);
   }
 };
+
+exports.bulkGetUserById = async (req, reply) => {
+	try {
+		const users = await SecurityManagementService.bulkGetUserById(req.query.ids, req.headers.authorization);
+		return {users};
+	} catch (err) {
+		throw boomify(err);
+	}
+}

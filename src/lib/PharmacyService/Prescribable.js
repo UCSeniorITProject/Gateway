@@ -83,3 +83,48 @@ exports.patchPrescribable = async (prescribableId, fieldsToUpdate) => {
     throw boomify(err);
   }
 };
+
+exports.getNumberOfPrescribableByMonthForDoctor = async (doctorId) => {
+	try {
+		const requestOptions = {
+			method: 'GET',
+			uri: `${drugService}/api/prescribable/doctor/${doctorId}/by-month`,
+			json: true,
+		};
+
+		const prescribableBreakdown = await request(requestOptions);
+		return prescribableBreakdown.data;
+	} catch (err) {
+		throw boomify(err);
+	}
+};
+
+exports.getNumberOfPrescribablesByPatientForDoctor = async (doctorId) => {
+	try {
+		const requestOptions = {
+			method: 'GET',
+			uri: `${drugService}/api/prescribable/doctor/${doctorId}/patient/breakdown`,
+			json: true,
+		};
+
+		const prescribableByPatientForMonth = await request(requestOptions);
+		return prescribableByPatientForMonth.data;
+	} catch (err) {
+		throw boomify(err);
+	}
+};
+
+exports.getNumPrescribablesPerMonthForDoctor = async (doctorId) => {
+	try {
+		const requestOptions = {
+			method: 'GET',
+			uri: `${drugService}/api/prescribable/doctor/${doctorId}/breakdown/by-month`,
+			json: true,
+		};
+
+		const prescribableByDoctorForMonth = await request(requestOptions);
+		return prescribableByDoctorForMonth.data;
+	} catch (err) {
+		throw boomify(err);
+	}
+};

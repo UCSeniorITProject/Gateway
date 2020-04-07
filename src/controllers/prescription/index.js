@@ -7,5 +7,6 @@ module.exports = (fastify, options, next) => {
   fastify.delete('/prescription/:id', {schema: prescriptionSchema.deletePrescription}, prescriptionService.deletePrescription);
   fastify.post('/prescription', {schema: prescriptionSchema.createPrescription}, prescriptionService.createPrescription);
 	fastify.get('/prescription/:patientId/month', {schema: prescriptionSchema.getPrescriptionsByMonthForPatient}, prescriptionService.getPrescriptionsAggregatedByMonthForYear);
+	fastify.get('/prescription/doctor/:doctorId/month', {schema: prescriptionSchema.getPrescriptionsByMonthForDoctor}, prescriptionService.getPrescriptionsByMonthForDoctor);
 	next();
 };
