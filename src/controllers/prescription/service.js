@@ -43,6 +43,15 @@ exports.getPrescriptionsAggregatedByMonthForYear = async (req, reply) => {
 	}
 };
 
+exports.getPrescriptionsByMonthForDoctor = async (req, reply) => {
+	try {
+		const prescriptionsByMonth = await prescriptionRequests.getPrescriptionsForMonthByDoctor(req.params.doctorId);
+		return {data: prescriptionsByMonth};
+	} catch (err) {
+		throw boomify(err);
+	}
+};
+
 exports.getPrescription = async (req, reply) => {
   try {
     const prescription = await prescriptionRequests.getPrescriptionById(req.params.id);

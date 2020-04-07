@@ -1,6 +1,6 @@
 const request = require('request-promise');
 const {securityManagement} = require('../../../config').services;
-const qs = require('query-string');
+const qs = require('qs');
 const {boomify} = require('boom');
 
 exports.login = async (username, password) => {
@@ -28,10 +28,11 @@ exports.login = async (username, password) => {
 };
 
 exports.bulkGetUserById = async (userIds, token) => {
+	console.log(userIds, qs.stringify({id:[userIds]}))
   try {
     const requestOptions = {
       method: 'GET',
-      uri: `${securityManagement}/api/user/bulk?${qs.stringify({id:userIds})}`,
+      uri: `${securityManagement}/api/user/bulk?${qs.stringify({id:[-1, ...userIds]}, {indices: false})}`,
       headers: {
         authorization: token,
       },
@@ -41,7 +42,6 @@ exports.bulkGetUserById = async (userIds, token) => {
     const bulkUserRequest = await request(requestOptions);
     return bulkUserRequest.users;
   } catch (err) {
-		console.log(err)
     throw boomify(err);
   }
 }
@@ -141,3 +141,41 @@ exports.updateUser = async (userID, propertiesToUpdate, token) => {
     throw boomify(err);
   }
 };
+
+exports.getRoleWithFilter = async (filter, token) => {
+	try {
+		const requestOptions = {
+			method: 'GET',
+			uri: `${securityManagement}/api/role`,
+			qs: filter,
+			json: true,
+			headers: {
+				authorization: token,
+			},
+		};
+
+		const roles = await request(requestOptions);
+		return roles.roles;
+	} catch (err) {
+		throw boomify(err);
+	}
+};
+
+exports.getUserRoleWithFilter = async (filter, token) => {
+	try {
+		const requestOptions = {
+			method: 'GET',
+			uri: `${securityManagement}/api/user-role`,
+			qs: filter,
+			json: true,
+			headers: {
+				authorization: token,
+			},
+		};
+
+		const userRoles = await request(requestOptions);
+		return userRoles.userRoles;
+	} catch (err) {
+		throw boomify(err);
+	}
+}

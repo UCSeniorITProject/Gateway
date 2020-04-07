@@ -77,3 +77,18 @@ exports.patchPrescription = async (prescriptionId, pharmacyFieldsToUpdate) => {
 		throw boomify(err);
 	}
 };
+
+exports.getPrescriptionsForMonthByDoctor = async (doctorId) => {
+	try {
+		const requestOptions = {
+			method: 'GET',
+			uri: `${drugService}/api/prescription/doctor/${doctorId}/month`,
+			json: true,
+		};
+
+		const data = await request(requestOptions);
+		return data.data;
+	} catch (err) {
+		throw boomify(err);
+	}
+};

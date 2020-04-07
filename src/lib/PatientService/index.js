@@ -5,6 +5,7 @@ const qs = require('querystring');
  
 exports.getPatientWithFilter = async (filter) => {
  try {
+	 console.log(filter)
    const requestOptions = {
      method: 'GET',
 		 uri: `${patientService}/api/patient`,
