@@ -42,13 +42,16 @@ exports.getPatientWithFilter = async(req, reply) => {
   try {
 		console.log(req.query)
 		const patients = await PatientManagementService.getPatientWithFilter(req.query);
-    const users = await SecurityManagementService.bulkGetUserById(patients.map(x=>x.patientUserId), req.headers.authorization);
-		return {patients: patients.map( x=> {
-      const user = users.filter(y=>y.id===x.patientUserId);
-      return {
-        ...x, firstName: user[0].firstName, lastName: user[0].lastName,
-      };
-    })};
+		if(patients.length){
+			const users = await SecurityManagementService.bulkGetUserById(patients.map(x=>x.patientUserId), req.headers.authorization);
+			return {patients: patients.map( x=> {
+				const user = users.filter(y=>y.id===x.patientUserId);
+				return {
+					...x, firstName: user[0].firstName, lastName: user[0].lastName,
+				};
+			})};
+		}
+		return {patients: []};
   } catch (err) {
     throw boomify(err);
   }
