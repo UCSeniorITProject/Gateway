@@ -36,6 +36,7 @@ const {unAuthorizedEndpoints} = require('../unAuthorizedEndpoints');
     });
 
 	fastify.register(require('fastify-swagger'), swagger.options);
+	fastify.register(require('./controllers/drugType'), {prefix: '/api/pharmacy-service'})
 	fastify.register(require('./controllers/prescriptionReason'), {prefix: '/api/pharmacy-service'});
 	fastify.register(require('./controllers/userRole'), {prefix: '/api/security-service'})
 	fastify.register(require('./controllers/role'), {prefix: '/api/security-service'});
