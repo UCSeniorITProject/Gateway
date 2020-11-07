@@ -1,11 +1,11 @@
-const request = require('request-promise');
-const {drugService} = require('../../../config').services;
-const {boomify} = require('boom');
+const request = require("request-promise");
+const { drugService } = require("../../../config").services;
+const { boomify } = require("boom");
 
 exports.createPrescribable = async (prescribable) => {
   try {
     const requestOptions = {
-      method: 'POST',
+      method: "POST",
       uri: `${drugService}/api/prescribable`,
       body: {
         prescribable,
@@ -21,24 +21,24 @@ exports.createPrescribable = async (prescribable) => {
 };
 
 exports.getPrescribablesPerMonth = async (patientId) => {
-	try {
-		const requestOptions = {
-			method: 'GET',
-			uri: `${drugService}/api/prescribable/${patientId}/by-month`,
-			json: true,
-		};
+  try {
+    const requestOptions = {
+      method: "GET",
+      uri: `${drugService}/api/prescribable/${patientId}/by-month`,
+      json: true,
+    };
 
-		const prescribablesByMonth = await request(requestOptions);
-		return prescribablesByMonth.data;
-	} catch (err) {
-		throw boomify(err);
-	}
-}
+    const prescribablesByMonth = await request(requestOptions);
+    return prescribablesByMonth.data;
+  } catch (err) {
+    throw boomify(err);
+  }
+};
 
 exports.getPrescribableWithFilter = async (filter) => {
   try {
     const requestOptions = {
-      method: 'GET',
+      method: "GET",
       uri: `${drugService}/api/prescribable`,
       qs: filter,
       json: true,
@@ -54,7 +54,7 @@ exports.getPrescribableWithFilter = async (filter) => {
 exports.deletePrescribable = async (prescribableId) => {
   try {
     const requestOptions = {
-      method: 'DELETE',
+      method: "DELETE",
       uri: `${drugService}/api/prescribable/${prescribableId}`,
       json: true,
     };
@@ -69,13 +69,13 @@ exports.deletePrescribable = async (prescribableId) => {
 exports.patchPrescribable = async (prescribableId, fieldsToUpdate) => {
   try {
     const requestOptions = {
-      method: 'PATCH',
+      method: "PATCH",
       uri: `${drugService}/api/prescribable/${prescribableId}`,
       body: {
         prescribable: fieldsToUpdate,
       },
       json: true,
-    }
+    };
 
     const prescribable = await request(requestOptions);
     return prescribable.prescribable;
@@ -85,46 +85,46 @@ exports.patchPrescribable = async (prescribableId, fieldsToUpdate) => {
 };
 
 exports.getNumberOfPrescribableByMonthForDoctor = async (doctorId) => {
-	try {
-		const requestOptions = {
-			method: 'GET',
-			uri: `${drugService}/api/prescribable/doctor/${doctorId}/by-month`,
-			json: true,
-		};
+  try {
+    const requestOptions = {
+      method: "GET",
+      uri: `${drugService}/api/prescribable/doctor/${doctorId}/by-month`,
+      json: true,
+    };
 
-		const prescribableBreakdown = await request(requestOptions);
-		return prescribableBreakdown.data;
-	} catch (err) {
-		throw boomify(err);
-	}
+    const prescribableBreakdown = await request(requestOptions);
+    return prescribableBreakdown.data;
+  } catch (err) {
+    throw boomify(err);
+  }
 };
 
 exports.getNumberOfPrescribablesByPatientForDoctor = async (doctorId) => {
-	try {
-		const requestOptions = {
-			method: 'GET',
-			uri: `${drugService}/api/prescribable/doctor/${doctorId}/patient/breakdown`,
-			json: true,
-		};
+  try {
+    const requestOptions = {
+      method: "GET",
+      uri: `${drugService}/api/prescribable/doctor/${doctorId}/patient/breakdown`,
+      json: true,
+    };
 
-		const prescribableByPatientForMonth = await request(requestOptions);
-		return prescribableByPatientForMonth.data;
-	} catch (err) {
-		throw boomify(err);
-	}
+    const prescribableByPatientForMonth = await request(requestOptions);
+    return prescribableByPatientForMonth.data;
+  } catch (err) {
+    throw boomify(err);
+  }
 };
 
 exports.getNumPrescribablesPerMonthForDoctor = async (doctorId) => {
-	try {
-		const requestOptions = {
-			method: 'GET',
-			uri: `${drugService}/api/prescribable/doctor/${doctorId}/breakdown/by-month`,
-			json: true,
-		};
+  try {
+    const requestOptions = {
+      method: "GET",
+      uri: `${drugService}/api/prescribable/doctor/${doctorId}/breakdown/by-month`,
+      json: true,
+    };
 
-		const prescribableByDoctorForMonth = await request(requestOptions);
-		return prescribableByDoctorForMonth.data;
-	} catch (err) {
-		throw boomify(err);
-	}
+    const prescribableByDoctorForMonth = await request(requestOptions);
+    return prescribableByDoctorForMonth.data;
+  } catch (err) {
+    throw boomify(err);
+  }
 };

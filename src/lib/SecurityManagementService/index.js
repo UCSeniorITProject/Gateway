@@ -1,12 +1,12 @@
-const request = require('request-promise');
-const {securityManagement} = require('../../../config').services;
-const qs = require('qs');
-const {boomify} = require('boom');
+const request = require("request-promise");
+const { securityManagement } = require("../../../config").services;
+const qs = require("qs");
+const { boomify } = require("boom");
 
 exports.login = async (username, password) => {
   try {
     const requestOptions = {
-      method: 'POST',
+      method: "POST",
       uri: `${securityManagement}/api/user/login`,
       body: {
         authDetails: {
@@ -16,11 +16,11 @@ exports.login = async (username, password) => {
       },
       json: true,
     };
-  
+
     const loginRequest = await request(requestOptions);
-    return {...loginRequest};
+    return { ...loginRequest };
   } catch (err) {
-    if(err.name === 'StatusCodeError'){
+    if (err.name === "StatusCodeError") {
       return {};
     }
     throw boomify(err);
@@ -28,28 +28,31 @@ exports.login = async (username, password) => {
 };
 
 exports.bulkGetUserById = async (userIds, token) => {
-	console.log(userIds, qs.stringify({id:[userIds]}))
+  console.log(userIds, qs.stringify({ id: [userIds] }));
   try {
     const requestOptions = {
-      method: 'GET',
-      uri: `${securityManagement}/api/user/bulk?${qs.stringify({id:[-1, ...userIds]}, {indices: false})}`,
+      method: "GET",
+      uri: `${securityManagement}/api/user/bulk?${qs.stringify(
+        { id: [-1, ...userIds] },
+        { indices: false }
+      )}`,
       headers: {
         authorization: token,
       },
       json: true,
-    }
+    };
 
     const bulkUserRequest = await request(requestOptions);
     return bulkUserRequest.users;
   } catch (err) {
     throw boomify(err);
   }
-}
+};
 
 exports.refreshAccessToken = async (refreshToken) => {
   try {
     const requestOptions = {
-      method: 'POST',
+      method: "POST",
       uri: `${securityManagement}/api/user/token/refresh`,
       body: {
         refreshToken,
@@ -58,9 +61,9 @@ exports.refreshAccessToken = async (refreshToken) => {
     };
 
     const tokenRefreshRequest = await request(requestOptions);
-    return {...tokenRefreshRequest};
+    return { ...tokenRefreshRequest };
   } catch (err) {
-    if(err.name === 'StatusCodeError'){
+    if (err.name === "StatusCodeError") {
       return {};
     }
     throw boomify(err);
@@ -70,7 +73,7 @@ exports.refreshAccessToken = async (refreshToken) => {
 exports.verifyToken = async (token) => {
   try {
     const requestOptions = {
-      method: 'POST',
+      method: "POST",
       uri: `${securityManagement}/api/user/token/verify`,
       body: {
         token,
@@ -79,8 +82,8 @@ exports.verifyToken = async (token) => {
     };
 
     const tokenVerificationRequest = await request(requestOptions);
-    return {...tokenVerificationRequest};
-  } catch (err){
+    return { ...tokenVerificationRequest };
+  } catch (err) {
     throw boomify(err);
   }
 };
@@ -88,7 +91,7 @@ exports.verifyToken = async (token) => {
 exports.createUser = async (user) => {
   try {
     const requestOptions = {
-      method: 'POST',
+      method: "POST",
       uri: `${securityManagement}/api/user`,
       body: {
         user,
@@ -97,7 +100,7 @@ exports.createUser = async (user) => {
     };
 
     const userCreateRequest = await request(requestOptions);
-    return {...userCreateRequest.user};
+    return { ...userCreateRequest.user };
   } catch (err) {
     throw boomify(err);
   }
@@ -106,7 +109,7 @@ exports.createUser = async (user) => {
 exports.getUserWithFilter = async (filter, token) => {
   try {
     const requestOptions = {
-      method: 'GET',
+      method: "GET",
       uri: `${securityManagement}/api/user?${qs.stringify(filter)}`,
       headers: {
         authorization: token,
@@ -124,7 +127,7 @@ exports.getUserWithFilter = async (filter, token) => {
 exports.updateUser = async (userID, propertiesToUpdate, token) => {
   try {
     const requestOptions = {
-      method: 'PATCH',
+      method: "PATCH",
       uri: `${securityManagement}/api/user/${userID}`,
       body: {
         ...propertiesToUpdate,
@@ -137,45 +140,45 @@ exports.updateUser = async (userID, propertiesToUpdate, token) => {
 
     const updateUserRequest = await request(requestOptions);
     return updateUserRequest.user;
-  } catch (err){
+  } catch (err) {
     throw boomify(err);
   }
 };
 
 exports.getRoleWithFilter = async (filter, token) => {
-	try {
-		const requestOptions = {
-			method: 'GET',
-			uri: `${securityManagement}/api/role`,
-			qs: filter,
-			json: true,
-			headers: {
-				authorization: token,
-			},
-		};
+  try {
+    const requestOptions = {
+      method: "GET",
+      uri: `${securityManagement}/api/role`,
+      qs: filter,
+      json: true,
+      headers: {
+        authorization: token,
+      },
+    };
 
-		const roles = await request(requestOptions);
-		return roles.roles;
-	} catch (err) {
-		throw boomify(err);
-	}
+    const roles = await request(requestOptions);
+    return roles.roles;
+  } catch (err) {
+    throw boomify(err);
+  }
 };
 
 exports.getUserRoleWithFilter = async (filter, token) => {
-	try {
-		const requestOptions = {
-			method: 'GET',
-			uri: `${securityManagement}/api/user-role`,
-			qs: filter,
-			json: true,
-			headers: {
-				authorization: token,
-			},
-		};
+  try {
+    const requestOptions = {
+      method: "GET",
+      uri: `${securityManagement}/api/user-role`,
+      qs: filter,
+      json: true,
+      headers: {
+        authorization: token,
+      },
+    };
 
-		const userRoles = await request(requestOptions);
-		return userRoles.userRoles;
-	} catch (err) {
-		throw boomify(err);
-	}
-}
+    const userRoles = await request(requestOptions);
+    return userRoles.userRoles;
+  } catch (err) {
+    throw boomify(err);
+  }
+};

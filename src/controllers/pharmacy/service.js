@@ -1,10 +1,10 @@
-const pharmacyRequests = require('../../lib/PharmacyService/Pharmacy');
-const {boomify} = require('boom');
+const pharmacyRequests = require("../../lib/PharmacyService/Pharmacy");
+const { boomify } = require("boom");
 
 exports.createPharmacy = async (req, reply) => {
   try {
     const pharmacy = await pharmacyRequests.createPharmacy(req.body.pharmacy);
-    return {pharmacy};
+    return { pharmacy };
   } catch (err) {
     throw boomify(err);
   }
@@ -21,8 +21,11 @@ exports.deletePharmacy = async (req, reply) => {
 
 exports.patchPharmacy = async (req, reply) => {
   try {
-    const pharmacy = await pharmacyRequests.patchPharmacy(req.params.id, req.body.pharmacy);
-    return {pharmacy};
+    const pharmacy = await pharmacyRequests.patchPharmacy(
+      req.params.id,
+      req.body.pharmacy
+    );
+    return { pharmacy };
   } catch (err) {
     throw boomify(err);
   }
@@ -31,7 +34,7 @@ exports.patchPharmacy = async (req, reply) => {
 exports.getPharmacyWithFilter = async (req, reply) => {
   try {
     const pharmacies = await pharmacyRequests.getPharmacyWithFilter(req.query);
-    return {pharmacies};
+    return { pharmacies };
   } catch (err) {
     throw boomify(err);
   }
@@ -40,7 +43,7 @@ exports.getPharmacyWithFilter = async (req, reply) => {
 exports.getPharmacyById = async (req, reply) => {
   try {
     const pharmacy = await pharmacyRequests.getPharmacyById(req.params.id);
-    return {pharmacy};
+    return { pharmacy };
   } catch (err) {
     throw boomify(err);
   }

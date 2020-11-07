@@ -1,11 +1,11 @@
-const request = require('request-promise');
-const {drugService} = require('../../../config').services;
-const {boomify} = require('boom');
+const request = require("request-promise");
+const { drugService } = require("../../../config").services;
+const { boomify } = require("boom");
 
 exports.createPrescriptionReason = async (prescriptionReason) => {
   try {
     const requestOptions = {
-      method: 'POST',
+      method: "POST",
       uri: `${drugService}/api/prescription-reason`,
       body: {
         prescriptionReason,
@@ -21,39 +21,42 @@ exports.createPrescriptionReason = async (prescriptionReason) => {
 };
 
 exports.getPrescriptionReasounCount = async (patientId) => {
-	try {
-		const requestOptions = {
-			method: 'GET',
-			uri: `${drugService}/api/prescription-reason/${patientId}/by-patient`,
-			json: true,
-		};
-
-		const prescriptionReasonCount = await request(requestOptions);
-		return prescriptionReasonCount.data;
-	} catch (err){
-		throw boomify(err);
-	}
-}
-
-exports.getPrescriptionReasonByPrescribable = async (patientId) => {
-	try {
-		const requestOptions = {
-			method: 'GET',
-			uri: `${drugService}/api/prescription-reason/${patientId}/by-prescribable`,
-			json: true,
-		};
-
-		const prescriptionReasonsByPrescribable = await request(requestOptions);
-		return prescriptionReasonsByPrescribable.data;
-	} catch (err) {
-		throw boomify(err);
-	}
-};
-
-exports.patchPrescriptionReason = async (prescriptionReasonId, prescriptionReason) => {
   try {
     const requestOptions = {
-      method: 'PATCH',
+      method: "GET",
+      uri: `${drugService}/api/prescription-reason/${patientId}/by-patient`,
+      json: true,
+    };
+
+    const prescriptionReasonCount = await request(requestOptions);
+    return prescriptionReasonCount.data;
+  } catch (err) {
+    throw boomify(err);
+  }
+};
+
+exports.getPrescriptionReasonByPrescribable = async (patientId) => {
+  try {
+    const requestOptions = {
+      method: "GET",
+      uri: `${drugService}/api/prescription-reason/${patientId}/by-prescribable`,
+      json: true,
+    };
+
+    const prescriptionReasonsByPrescribable = await request(requestOptions);
+    return prescriptionReasonsByPrescribable.data;
+  } catch (err) {
+    throw boomify(err);
+  }
+};
+
+exports.patchPrescriptionReason = async (
+  prescriptionReasonId,
+  prescriptionReason
+) => {
+  try {
+    const requestOptions = {
+      method: "PATCH",
       uri: `${drugService}/api/prescription-reason/${prescriptionReasonId}`,
       body: {
         prescriptionReason,
@@ -71,7 +74,7 @@ exports.patchPrescriptionReason = async (prescriptionReasonId, prescriptionReaso
 exports.deletePrescriptionReason = async (prescriptionReasonId) => {
   try {
     const requestOptions = {
-      method: 'DELETE',
+      method: "DELETE",
       uri: `${drugService}/api/prescription-reason/${prescriptionReasonId}`,
       json: true,
     };
@@ -86,7 +89,7 @@ exports.deletePrescriptionReason = async (prescriptionReasonId) => {
 exports.getPrescriptionReasonWithFilter = async (filter) => {
   try {
     const requestOptions = {
-      method: 'GET',
+      method: "GET",
       uri: `${drugService}/api/prescription-reason`,
       qs: filter,
       json: true,
